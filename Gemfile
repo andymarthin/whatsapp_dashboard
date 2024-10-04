@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+ruby file: ".ruby-version"
 
 # Use main development branch of Rails
 gem "rails", github: "rails/rails", branch: "main"
@@ -57,6 +58,6 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem "capybara", require: false
+  gem "selenium-webdriver", require: false
 end
