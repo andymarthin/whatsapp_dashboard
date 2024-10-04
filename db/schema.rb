@@ -10,8 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 0) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_04_054424) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "room_id", null: false
+    t.integer "message_type"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "open_until"
+    t.string "from"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from"], name: "index_rooms_on_from"
+  end
+
+  add_foreign_key "messages", "rooms"
 end

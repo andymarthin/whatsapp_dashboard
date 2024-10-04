@@ -18,6 +18,7 @@ gem "solid_cable"
 gem "bootsnap", require: false
 gem "kamal", require: false
 gem "thruster", require: false
+gem "faraday"
 
 group :development, :test do
   gem "dotenv", ">= 3.0"

@@ -1,0 +1,25 @@
+# == Schema Information
+#
+# Table name: rooms
+#
+#  id         :bigint           not null, primary key
+#  from       :string
+#  name       :string
+#  open_until :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_rooms_on_from  (from)
+#
+
+one:
+  name: MyString
+  open_until: 2024-10-04 12:41:22
+  from: MyString
+
+two:
+  name: MyString
+  open_until: 2024-10-04 12:41:22
+  from: MyString

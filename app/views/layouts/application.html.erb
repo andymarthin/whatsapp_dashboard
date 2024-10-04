@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  class="dark">
   <head>
     <title><%= content_for?(:title) ? strip_tags(yield(:title)) : "Whatsapp Dashboard" %></title>
     <meta name="apple-mobile-web-app-title" content="Whatsapp Dashboard">
@@ -24,7 +24,14 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-gray-50 dark:bg-gray-900">
+    <main >
+      <div class="container px-4 pt-24 mx-auto lg:px-0 dark:bg-gray-900">
+        <div id="notification-flash" class="fixed right-0 z-[150]">
+          <%= render "layouts/notification" %>
+        </div>
+        <%= yield %>
+      </div>
+    </main>
   </body>
 </html>
