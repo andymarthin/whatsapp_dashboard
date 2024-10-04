@@ -359,6 +359,7 @@ DEPENDENCIES
   capybara
   cssbundling-rails
   debug
+  dotenv (>= 3.0)
   jbuilder
   jsbundling-rails
   kamal
