@@ -19,6 +19,7 @@ gem "bootsnap", require: false
 gem "kamal", require: false
 gem "thruster", require: false
 gem "faraday"
+gem "jwt"
 
 group :development, :test do
   gem "dotenv", ">= 3.0"

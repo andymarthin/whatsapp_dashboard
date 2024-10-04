@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  class="dark">
+<html lang="en" class="dark">
   <head>
     <title><%= content_for?(:title) ? strip_tags(yield(:title)) : "Whatsapp Dashboard" %></title>
     <meta name="apple-mobile-web-app-title" content="Whatsapp Dashboard">
@@ -25,7 +25,7 @@
   </head>
 
   <body class="bg-gray-50 dark:bg-gray-900">
-    <main >
+    <main>
       <div class="container px-4 pt-24 mx-auto lg:px-0 dark:bg-gray-900">
         <div id="notification-flash" class="fixed right-0 z-[150]">
           <%= render "layouts/notification" %>
