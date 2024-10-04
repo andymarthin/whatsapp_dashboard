@@ -19,13 +19,9 @@
 #
 class Message < ApplicationRecord
   belongs_to :room
-  enum message_type: { sent: 1, receive: 2 }
+  enum :message_type, { sent: 1, receive: 2 }
 
-  after_create_commit :broadcast_message
-
-  def broadcast_message
-    return unless receive?
-
+  after_create_commit {
     broadcast_append_to(
       "room_#{room_id}",
       partial: "rooms/message",
@@ -34,5 +30,5 @@ class Message < ApplicationRecord
         message: self
       },
     )
-  end
+  }
 end

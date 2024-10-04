@@ -4,10 +4,10 @@
     <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
   </div>
   <div class="min-h-32 px-4 py-2 text-gray-400 rounded dark:border-gray-60 h-full">
-    <div id="messages">
+    <%= turbo_frame_tag "messages", data_autoscroll_block: 'smooth' do %>
       <%= render partial: "rooms/message", collection: @messages, as: :message %>
-    </div>
-    <%= turbo_stream_from("room_#{@room.id}")%>
+    <% end %>
+    <%= turbo_stream_from(dom_id(@room))%>
     <div class="sticky bottom-0 justify-between items-center w-full bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
       <div class="w-full  py-4 items-center gap-2 inline-flex justify-between">
         <div class="relative w-full" id="message-form">
