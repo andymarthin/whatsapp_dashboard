@@ -32,6 +32,8 @@ class MessageComponent < ViewComponent::Base
     case message.message_type
     when "location"
       Message::LocationComponent.new(message:)
+    when "image"
+      Message::ImageComponent.new(message:)
     else
       Message::TextComponent.new(message:)
     end

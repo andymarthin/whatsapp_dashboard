@@ -1,5 +1,6 @@
 module WhatsappService
   class StoreMessage < Base
+    MEDIA_TYPES = %w[image]
     def initialize(params)
       @params = params
       super
@@ -7,7 +8,7 @@ module WhatsappService
 
     def call
       ActiveRecord::Base.transaction do
-        Message.create(
+        message = Message.create(
           message: raw_message,
           room_id: room&.id,
           sender: phone_number,
@@ -15,6 +16,9 @@ module WhatsappService
           message_id:,
           message_type:
         )
+        if MEDIA_TYPES.include?(message_type)
+          StoreAttachment.call(params, message)
+        end
       end
     end
 

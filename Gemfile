@@ -22,6 +22,7 @@ gem "faraday"
 gem "jwt"
 gem "view_component"
 gem "shrine"
+gem "httparty"
 
 group :development, :test do
   gem "dotenv", ">= 3.0"

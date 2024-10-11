@@ -5,7 +5,7 @@ class RoomsController < ApplicationController
 
   def show
     @room = room
-    @messages = @room.messages.order(created_at: :asc)
+    @messages = @room.messages.includes(:attachment).order(created_at: :asc)
   end
 
   def create
