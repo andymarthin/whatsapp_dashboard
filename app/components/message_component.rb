@@ -28,6 +28,14 @@ class MessageComponent < ViewComponent::Base
     end
   end
 
+  def text_class
+    if message.receive_message?
+      "text-gray-900"
+    else
+      "text-white"
+    end
+  end
+
   def content_component
     case message.message_type
     when "location"
@@ -36,6 +44,8 @@ class MessageComponent < ViewComponent::Base
       Message::ImageComponent.new(message:)
     when "video"
       Message::VideoComponent.new(message:)
+    when "document"
+      Message::DocumentComponent.new(message:)
     else
       Message::TextComponent.new(message:)
     end

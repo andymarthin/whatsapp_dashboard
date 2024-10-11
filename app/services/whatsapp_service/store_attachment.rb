@@ -10,6 +10,7 @@ module WhatsappService
 
     def call
       attachment = Attachment.new(message:)
+      attachment.name = filename
       attachment.file_attacher.assign(media)
       attachment.save
     end
@@ -53,6 +54,12 @@ module WhatsappService
 
     def media_id
       params.dig("messages", 0, message_type, "id")
+    end
+
+    def filename
+      return unless message_type.eql?("document")
+
+      params.dig("messages", 0, message_type, "filename")
     end
   end
 end

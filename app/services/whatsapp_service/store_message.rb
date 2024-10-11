@@ -1,6 +1,6 @@
 module WhatsappService
   class StoreMessage < Base
-    MEDIA_TYPES = %w[image video]
+    MEDIA_TYPES = Message.message_types.keys.excluding("text", "location")
     def initialize(params)
       @params = params
       super
