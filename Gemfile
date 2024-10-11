@@ -21,6 +21,7 @@ gem "thruster", require: false
 gem "faraday"
 gem "jwt"
 gem "view_component"
+gem "shrine"
 
 group :development, :test do
   gem "dotenv", ">= 3.0"

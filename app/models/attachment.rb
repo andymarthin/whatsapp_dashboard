@@ -18,4 +18,5 @@
 #
 class Attachment < ApplicationRecord
   belongs_to :message
+  include FileUploader::Attachment(:file)
 end
