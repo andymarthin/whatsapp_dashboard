@@ -1,11 +1,11 @@
-require 'shrine'
-require 'shrine/storage/file_system'
+require "shrine"
+require "shrine/storage/file_system"
 
 Shrine.storages = {
-  cache: Shrine::Storage::FileSystem.new('public', prefix: 'uploads/cache', directory_permissions: 0o755,
+  cache: Shrine::Storage::FileSystem.new("public", prefix: "uploads/cache", directory_permissions: 0o755,
                                                    permissions: 0o644),
-  store: Shrine::Storage::FileSystem.new('public', prefix: 'uploads', directory_permissions: 0o755,
-                                                   permissions: 0o644),
+  store: Shrine::Storage::FileSystem.new("public", prefix: "uploads", directory_permissions: 0o755,
+                                                   permissions: 0o644)
 }
 
 Shrine.plugin :activerecord           # loads Active Record integration
