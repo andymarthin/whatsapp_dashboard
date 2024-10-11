@@ -9,8 +9,14 @@ module WhatsappService
     def call
       return unless room
 
-      SendFreeTextMessage.call(to:, text:)
-      Message.create(room:, message: text, message_type: "sent")
+      message = SendFreeTextMessage.call(to:, text:)
+      Message.create(
+        room:,
+        message: text,
+        message_type: "text",
+        sender: whatsapp_phone_number,
+        message_id: message.dig("messages", 0, "id")
+      )
     end
 
     private

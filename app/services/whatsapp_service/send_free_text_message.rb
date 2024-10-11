@@ -8,7 +8,8 @@ module WhatsappService
 
     def call
       path = "#{api_version}/#{phone_number_id}/messages"
-      client.post(path, payload.to_json)
+      response = client.post(path, payload.to_json)
+      JSON.parse response.body
     end
 
     private

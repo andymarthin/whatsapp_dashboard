@@ -5,8 +5,11 @@
 #  id           :bigint           not null, primary key
 #  message      :text
 #  message_type :integer
+#  options      :jsonb
+#  sender       :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  message_id   :string
 #  room_id      :bigint           not null
 #
 # Indexes
@@ -19,7 +22,13 @@
 #
 class Message < ApplicationRecord
   belongs_to :room
-  enum :message_type, { sent: 1, receive: 2 }
+  enum :message_type, { text: 1, location: 2 }
+
+  has_one :attachment, dependent: :destroy
+
+  def receive_message?
+    sender.eql?(room.from)
+  end
 
   after_create_commit {
     broadcast_append_to(

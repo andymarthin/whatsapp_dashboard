@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_04_054424) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_10_173308) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "attachments", force: :cascade do |t|
+    t.bigint "message_id", null: false
+    t.text "file_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_attachments_on_message_id"
+  end
 
   create_table "messages", force: :cascade do |t|
     t.bigint "room_id", null: false
@@ -20,6 +28,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_04_054424) do
     t.text "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "message_id"
+    t.string "sender"
+    t.jsonb "options"
     t.index ["room_id"], name: "index_messages_on_room_id"
   end
 
@@ -32,5 +43,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_04_054424) do
     t.index ["from"], name: "index_rooms_on_from"
   end
 
+  add_foreign_key "attachments", "messages"
   add_foreign_key "messages", "rooms"
 end
