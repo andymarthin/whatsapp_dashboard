@@ -34,6 +34,8 @@ class MessageComponent < ViewComponent::Base
       Message::LocationComponent.new(message:)
     when "image"
       Message::ImageComponent.new(message:)
+    when "video"
+      Message::VideoComponent.new(message:)
     else
       Message::TextComponent.new(message:)
     end

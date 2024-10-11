@@ -22,7 +22,7 @@
 #
 class Message < ApplicationRecord
   belongs_to :room
-  enum :message_type, { text: 1, location: 2, image: 3 }
+  enum :message_type, { text: 1, location: 2, image: 3, video: 4 }
 
   has_one :attachment, dependent: :destroy
 

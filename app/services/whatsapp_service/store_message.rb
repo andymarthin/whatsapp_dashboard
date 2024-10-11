@@ -1,6 +1,6 @@
 module WhatsappService
   class StoreMessage < Base
-    MEDIA_TYPES = %w[image]
+    MEDIA_TYPES = %w[image video]
     def initialize(params)
       @params = params
       super
