@@ -5,7 +5,7 @@ module WhatsappService::Send
       @latitude = latitude
       @longitude = longitude
       @address = address
-      @name = location
+      @name = name
       super
     end
 
