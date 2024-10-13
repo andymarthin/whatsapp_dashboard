@@ -1,0 +1,7 @@
+[
+  {"title": "Opening hours", "id": "opening_hours", "answer": "Our restaurant is open from 9 AM to 10 PM every day. Special hours may apply on holidays.", "type": "text"},
+  {"title": "Location", "id": "location", "answer": "", "options": {"latitude": -6.263810, "longitude": 106.817703}, "type": "location"},
+  {"title": "Do you offer delivery services?", "id": "delivery_service", "answer": "Yes, we offer delivery through GOJEK", "type": "text"},
+  {"title": "Do you have outdoor seating?", "id": "outdoor", "answer": "Yes, we offer outdoor seating. It is available on a first-come, first-served basis, or you can make a reservation for outdoor seating.", "type": "text"},
+  {"title": "Chat with Costumer Service", "id": "cs", "answer": "Our restaurant is open from 9 AM to 10 PM every day. Special hours may apply on holidays.", "type": "cs"}
+]

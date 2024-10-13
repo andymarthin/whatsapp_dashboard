@@ -3,6 +3,7 @@
 # Table name: rooms
 #
 #  id         :bigint           not null, primary key
+#  bot        :boolean          default(TRUE)
 #  from       :string
 #  name       :string
 #  open_until :datetime

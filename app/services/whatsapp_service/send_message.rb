@@ -9,7 +9,7 @@ module WhatsappService
     def call
       return unless room
 
-      message = SendFreeTextMessage.call(to:, text:)
+      message = Send::Text.call(to:, text:)
       Message.create(
         room:,
         message: text,

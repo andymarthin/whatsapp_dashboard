@@ -1,7 +1,8 @@
 module WhatsappService
   class StoreMessage < Base
     MEDIA_TYPES = Message.message_types.keys.excluding("text", "location")
-    def initialize(params)
+    def initialize(params, bot: true)
+      @bot = bot
       @params = params
       super
     end
@@ -23,12 +24,14 @@ module WhatsappService
     end
 
     private
+    attr_reader :bot
 
     def room
       @room ||= begin
         room = Room.find_or_initialize_by(from: phone_number)
         room.name = contact_name
         room.open_until = 24.hours.from_now
+        room.bot = bot
         room.save
         room
       end
