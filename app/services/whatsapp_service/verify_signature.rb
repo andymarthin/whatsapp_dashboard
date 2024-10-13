@@ -2,6 +2,7 @@ module WhatsappService
   class VerifySignature < Base
     def initialize(request)
       @request = request
+      super
     end
 
     def call
@@ -15,7 +16,7 @@ module WhatsappService
     attr_reader :request
 
     def expected_hash
-      OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new("sha256"), ENV["META_APP_SECRET"], payload)
+      OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new("sha256"), meta_app_secret, payload)
     end
 
     def payload

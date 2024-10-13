@@ -1,7 +1,7 @@
 module WhatsappService
-  class GenerateToken < ApplicationService
+  class GenerateToken < Base
     def call
-      hmac_secret = ENV["META_APP_SECRET"]
+      hmac_secret = meta_app_secret
       iat ||= Time.zone.now.to_i
       payload = {
         iat: iat

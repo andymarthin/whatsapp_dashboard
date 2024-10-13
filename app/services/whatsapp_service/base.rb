@@ -5,11 +5,12 @@ module WhatsappService
       @phone_number_id = ENV["WHATSAPP_PHONE_NUMBER_ID"]
       @api_version = ENV.fetch("WHATSAPP_API_VERSION") { "v20.0" }
       @whatsapp_phone_number = ENV["WHATSAPP_PHONE_NUMBER"]
+      @meta_app_secret = ENV["META_APP_SECRET"]
     end
 
     private
 
-    attr_reader :whatsapp_access_token, :phone_number_id, :params, :api_version, :whatsapp_phone_number
+    attr_reader :whatsapp_access_token, :phone_number_id, :params, :api_version, :whatsapp_phone_number, :meta_app_secret
 
     def client
       @client ||= Faraday.new(url: "https://graph.facebook.com") do |faraday|

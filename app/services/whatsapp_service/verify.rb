@@ -1,11 +1,12 @@
 module WhatsappService
-  class Verify < ApplicationService
+  class Verify < Base
     def initialize(token)
       @token = token
+      super
     end
 
     def call
-      hmac_secret = Rails.application.credentials.jwt_secret_key
+      hmac_secret = meta_app_secret
       JWT.decode(
         token,
         hmac_secret,
