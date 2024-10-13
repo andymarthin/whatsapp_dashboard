@@ -6,7 +6,7 @@ module WhatsappService
 
     def call
       raise Error, "Signature Not found" unless signature
-      raise Error, "Signature Not Match" unless signature.eql?(expectedHash)
+      raise Error, "Signature Not Match" unless signature.eql?(expected_hash)
 
       true
     end
@@ -14,7 +14,7 @@ module WhatsappService
     private
     attr_reader :request
 
-    def expectedHash
+    def expected_hash
       OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new("sha256"), ENV["META_APP_SECRET"], payload)
     end
 
