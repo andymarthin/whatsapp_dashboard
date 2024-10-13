@@ -7,6 +7,7 @@ class Webhook::WhatsappsController < ApplicationController
   end
 
   def create
+    WhatsappService::VerifySignature.call(request)
     WhatsappService::Webhook.call(params)
     head :ok
   end

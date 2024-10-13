@@ -32,6 +32,7 @@ module WhatsappService
       room.open_until = 24.hours.from_now
       room.bot = bot
       room.save
+      room
     end
 
     def options
