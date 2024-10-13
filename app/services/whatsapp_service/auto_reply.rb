@@ -6,13 +6,8 @@ module WhatsappService
     end
 
     def call
-      if message_type.eql?("text") && room.bot?
-        initialize_bot
-      end
-
-      if message_type.eql?("interactive")
-        interactive_bot
-      end
+      initialize_bot if message_type.eql?("text") && room.bot?
+      interactive_bot(list) if message_type.eql?("interactive")
     end
 
     private
@@ -20,12 +15,16 @@ module WhatsappService
     def initialize_bot
       message = "hello what can i help you?"
       button = "Select Question"
-      interactive = Interactive::List.call(build_sections, message, button)
+      send_list(list, message, button)
+    end
+
+    def send_list(list, message, button)
+      interactive = Interactive::List.call(build_sections(list), message, button)
       Send::Interactive.call(phone_number, interactive)
     end
 
-    def interactive_bot
-      question = find_from_list(interactive_id)
+    def interactive_bot(list)
+      question = find_from_list(list, interactive_id)
       return unless question
 
       case question["type"]
@@ -34,9 +33,14 @@ module WhatsappService
         longitude = question.dig("options", "longitude")
         Send::Location.call(phone_number, latitude, longitude)
       when "cs"
-        message = "Will connect to customer service"
+        message = "Please wait..."
         room.update(bot: false)
         Send::Text.call(to: phone_number, text: message)
+      when "list"
+        message = question["title"]
+        button = "Options"
+        list = question["list"]
+        send_list(list, message, button)
       else
         answer = question["answer"]
         Send::Text.call(to: phone_number, text: answer)
@@ -44,19 +48,19 @@ module WhatsappService
     end
 
     def list
-      @list ||= JSON.parse bot_file
+      JSON.parse bot_file
     end
 
-    def build_sections
+    def build_sections(list, title: "Options")
       [
         {
-          title: "Options",
-          rows: section_rows
+          title: title,
+          rows: section_rows(list)
         }
       ]
     end
 
-    def section_rows
+    def section_rows(list)
       list.map do |row|
         {
           id: row["id"],
@@ -66,8 +70,20 @@ module WhatsappService
       end
     end
 
-    def find_from_list(id)
-      list.find { |row| row["id"] == id }
+    def find_from_list(list, id, prefix = "")
+      ids = id.split("#")
+      current_id = "#{prefix}#{ids.shift}"
+      result = list.find { |row| row["id"] == current_id }
+
+      return nil unless result
+
+      return result if ids.empty?
+
+      if result["list"]
+        find_from_list(result["list"], ids.join("#"), "#{current_id}#")
+      else
+        nil
+      end
     end
 
     def interactive_type

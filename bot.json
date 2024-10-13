@@ -1,5 +1,14 @@
 [
   {"title": "hours", "description": "Opening Hours", "id": "opening_hours", "answer": "Our restaurant is open from 9 AM to 10 PM every day. Special hours may apply on holidays.", "type": "text"},
+  {"title": "Miscellaneous", "description": null, "id": "miscellaneous", "answer": null, "type": "list", "list": [
+    {"title": "Catering", "description": "Do you offer catering services?", "id": "miscellaneous#catering", "answer": "Yes, we offer catering for events.", "type": "text"},
+    {"title": "Parking", "description": "Is there parking available?", "id": "miscellaneous#parking", "answer": "We offer free parking, valet services.", "type": "text"},
+    {"title": "pet-friendly", "description": "Are you pet-friendly?", "id": "miscellaneous#pet_friendly", "answer": "We allow pets in our outdoor seating area, but pets are not permitted indoors unless they are service animals.", "type": "text"},
+    {"title": "Payment", "description": "Payment and Promotions", "id": "miscellaneous#payment", "answer": null, "type": "list", "list": [
+      {"title": "Methods", "description": "What payment methods do you accept?", "id": "miscellaneous#payment#methods", "answer": "We accept cash, credit/debit cards, and online payments through PayPal and  Google Pay", "type": "text"},
+      {"title": "Promotions", "description": "Do you have any current promotions or discounts?", "id": "miscellaneous#payment#promotions", "answer": "Yes! You can find our current promotions by asking the chatbot for \"deals\" or visiting our website", "type": "text"}
+    ]}
+  ]},
   {"title": "Location", "description": "where the location?", "id": "location", "answer": "", "options": {"latitude": -6.263810, "longitude": 106.817703}, "type": "location"},
   {"title": "Delivery", "description": "Do you offer delivery services?", "id": "delivery_service", "answer": "Yes, we offer delivery through GOJEK", "type": "text"},
   {"title": "Outdoor", "description": "Do you have outdoor seating?", "id": "outdoor", "answer": "Yes, we offer outdoor seating. It is available on a first-come, first-served basis, or you can make a reservation for outdoor seating.", "type": "text"},
