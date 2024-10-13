@@ -1,0 +1,6 @@
+<%= turbo_stream.prepend :messages do %>
+  <%= render partial: "rooms/message", collection: @messages, as: :message %>
+<% end %>
+<%= turbo_stream.replace  :pagination do %>
+  <%= turbo_frame_tag :pagination, loading: :lazy, src: room_path(@room, last_message_id: @messages.first.id, format: :turbo_stream)  if (@messages.size >= @pagy.vars[:items]) %>
+<% end %>
