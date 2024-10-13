@@ -41,11 +41,11 @@ module WhatsappService
     end
 
     def bot_file
-      @bot_file ||= File.open(Rails.root("bot.json"))
+      @bot_file ||= File.read(Rails.root.join("bot.json"))
     end
 
     def room
-      @room ||= Room.find_or_create_by(from: phone_number)
+      @room ||= Room.create_with(name: contact_name).find_or_create_by(from: phone_number)
     end
   end
 end

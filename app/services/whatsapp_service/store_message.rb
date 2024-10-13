@@ -1,13 +1,14 @@
 module WhatsappService
   class StoreMessage < Base
     MEDIA_TYPES = Message.message_types.keys.excluding("text", "location")
-    def initialize(params, bot: true)
-      @bot = bot
+    def initialize(params)
       @params = params
       super
     end
 
     def call
+      return if message_type.eql?("interactive")
+
       ActiveRecord::Base.transaction do
         room = update_room
         message = Message.create(
@@ -25,12 +26,10 @@ module WhatsappService
     end
 
     private
-    attr_reader :bot
 
     def update_room
       room.name = contact_name
       room.open_until = 24.hours.from_now
-      room.bot = bot
       room.save
       room
     end
