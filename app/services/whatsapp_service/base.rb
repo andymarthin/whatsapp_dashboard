@@ -31,16 +31,20 @@ module WhatsappService
       params.dig("messages", 0, "text", "body")
     end
 
-    def messages
-      raw_message&.split("\n")
-    end
-
     def contact_name
       params.dig("contacts", 0, "profile", "name")
     end
 
     def message_type
       params.dig("messages", 0, "type")
+    end
+
+    def bot_file
+      @bot_file ||= File.open(Rails.root("bot.json"))
+    end
+
+    def room
+      @room ||= Room.find_or_create_by(from: phone_number)
     end
   end
 end

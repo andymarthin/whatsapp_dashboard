@@ -9,6 +9,7 @@ module WhatsappService
 
     def call
       ActiveRecord::Base.transaction do
+        room = update_room
         message = Message.create(
           message: raw_message,
           room_id: room&.id,
@@ -26,15 +27,11 @@ module WhatsappService
     private
     attr_reader :bot
 
-    def room
-      @room ||= begin
-        room = Room.find_or_initialize_by(from: phone_number)
-        room.name = contact_name
-        room.open_until = 24.hours.from_now
-        room.bot = bot
-        room.save
-        room
-      end
+    def update_room
+      room.name = contact_name
+      room.open_until = 24.hours.from_now
+      room.bot = bot
+      room.save
     end
 
     def options

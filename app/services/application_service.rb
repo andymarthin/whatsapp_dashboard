@@ -9,12 +9,7 @@ class ApplicationService
 
   private
 
-  def locale(kind)
-    t locale_key(kind)
-  end
-
-  def locale_key(kind)
-    class_name = self.class.name.underscore.split("/").join(".")
-    "services.#{class_name}.#{kind}"
+  def deep_compact(h)
+    h.each { |_, v| deep_compact(v) if v.is_a? Hash }.reject! { |_, v| v.nil? || v.empty? }
   end
 end

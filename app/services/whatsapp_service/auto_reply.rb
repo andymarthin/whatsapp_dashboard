@@ -10,12 +10,10 @@ module WhatsappService
 
     private
 
-    def list_file
-      @list_file ||= File.open(Rails.root("bot.json"))
-    end
+
 
     def list
-      @list ||= JSON.parse list_file
+      @list ||= JSON.parse bot_file
     end
   end
 end

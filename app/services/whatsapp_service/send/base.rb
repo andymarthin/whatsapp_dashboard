@@ -27,11 +27,11 @@ module WhatsappService::Send
     end
 
     def payload
-      raise "Need Implementation"
+      raise WhatsappService::Error, "Need Implementation"
     end
 
     def type
-      raise "Need Implementation"
+      raise WhatsappService::Error, "Need Implementation"
     end
   end
 end

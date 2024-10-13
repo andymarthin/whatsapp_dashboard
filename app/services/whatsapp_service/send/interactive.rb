@@ -1,8 +1,7 @@
 module WhatsappService::Send
   class Interactive < Base
-    def initialize(to, text, interactive)
+    def initialize(to, interactive)
       @to = to
-      @text = text
       @interactive = interactive
       super
     end
