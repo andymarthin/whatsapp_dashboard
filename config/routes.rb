@@ -12,7 +12,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :rooms, only: %i[create show index]
+  resources :rooms, only: %i[create show index] do
+    member do
+      post :init_session
+      post :end_session
+    end
+  end
   namespace :webhook do
     resource :whatsapp, only: %i[create show]
   end

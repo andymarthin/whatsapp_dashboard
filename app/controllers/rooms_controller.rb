@@ -18,10 +18,25 @@ class RoomsController < ApplicationController
     @message = WhatsappService::SendMessage.call(room_id: @room.id, text: params[:message])
   end
 
+  def init_session
+    WhatsappService::Send::Text.call(to:, text: ENV["AGENT_INIT_SESSION"])
+    redirect_to room_path(room), status: :see_other
+  end
+
+  def end_session
+    room.update(bot: true)
+    WhatsappService::Send::Text.call(to:, text: ENV["AGENT_END_SESSION"])
+    redirect_to rooms_path, status: :see_other
+  end
+
   private
 
   def room
     @room ||= Room.find params[:room_id].presence || params[:id]
+  end
+
+  def to
+    room.from
   end
 
   def pagy_countless_get_items(collection, pagy) # rubocop:disable Metrics/AbcSize
