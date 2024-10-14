@@ -46,10 +46,8 @@ module WhatsappService
     end
 
     def media_url
-      path = "#{api_version}/#{media_id}"
-      response = client.get(path)
-      body = JSON.parse response.body
-      body["url"]
+      response = Media::RetrieveMediaUrl.call(media_id)
+      response["url"]
     end
 
     def media_id

@@ -136,6 +136,8 @@ GEM
       faraday-net_http (>= 2.0, < 3.4)
       json
       logger
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
     faraday-net_http (3.3.0)
       net-http
     fugit (1.11.1)
@@ -194,6 +196,7 @@ GEM
     msgpack (1.7.2)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
+    multipart-post (2.4.1)
     net-http (0.4.1)
       uri
     net-imap (0.4.16)
@@ -408,12 +411,14 @@ DEPENDENCIES
   dotenv (>= 3.0)
   erb_lint
   faraday
+  faraday-multipart
   httparty
   jbuilder
   jsbundling-rails
   jwt
   kamal
   kredis
+  marcel
   pagy
   pg (~> 1.1)
   propshaft
