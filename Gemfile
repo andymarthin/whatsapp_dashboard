@@ -24,6 +24,7 @@ gem "view_component"
 gem "shrine"
 gem "httparty"
 gem "pagy"
+gem "kredis"
 
 group :development, :test do
   gem "dotenv", ">= 3.0"

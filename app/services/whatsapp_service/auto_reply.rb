@@ -6,15 +6,22 @@ module WhatsappService
     end
 
     def call
-      initialize_bot if message_type.eql?("text") && room.bot?
-      interactive_bot(question["list"]) if message_type.eql?("interactive")
+      if message_type.eql?("text") && room.bot?
+         data = Kredis.hash(room.id)
+         if data.to_h.present?
+          service_handle(data)
+         else
+          initialize_bot
+         end
+      end
+      interactive_bot(questions["list"]) if message_type.eql?("interactive")
     end
 
     private
 
     def initialize_bot
-      message = question["answer"]
-      send_list(question["list"], message)
+      message = questions["answer"]
+      send_list(questions["list"], message)
     end
 
     def send_list(list, message, button = "Options")
@@ -40,6 +47,9 @@ module WhatsappService
         list = question["list"]
         send_list(list, message)
       else
+        if question["type"].eql?("service")
+          Kredis.hash(room.id).update(id: question["id"])
+        end
         answer = question["answer"]
         Send::Text.call(to: phone_number, text: answer) if answer.present?
       end
@@ -49,8 +59,8 @@ module WhatsappService
       @bot_file ||= File.open(Rails.root.join("bot.yaml"))
     end
 
-    def question
-      @question ||= YAML.load(bot_file)
+    def questions
+      @questions ||= YAML.load(bot_file)
     end
 
     def build_sections(list, title: "Options")
@@ -94,6 +104,19 @@ module WhatsappService
 
     def interactive_id
        params.dig("messages", 0, "interactive", interactive_type, "id")
+    end
+
+    def service_handle(data)
+      current_session = data.to_h
+      question = find_from_list(questions["list"], current_session["id"])
+      service_answer = question["service_answer"]&.gsub("#INPUT", raw_message)
+      list = question["list"]
+      if list.present?
+        send_list(list, service_answer)
+      else
+        Send::Text.call(to: phone_number, text: service_answer) if service_answer.present?
+      end
+      data.del
     end
   end
 end
