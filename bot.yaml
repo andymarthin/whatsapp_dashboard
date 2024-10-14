@@ -2,84 +2,156 @@
 title:
 description: ""
 id:
-answer:
-  "\U0001F44B Halo! Selamat datang di layanan Pengiriman Import kami. Bagaimana
-  kami bisa membantu Anda hari ini?"
+answer: "👋 Halo! Selamat datang di layanan Pengiriman Kargoo Bagaimana kami bisa membantu Anda hari ini?\n\nIni adalah WhatsApp yang diotomatisasi, tidak ada orang yang mengoperasikan WhatsApp ini secara langsung.\n\nNamun anda dapat memilih bantuan melalui menu jika ingin terhubung dengan admin.\n\n"
+footer: Kargoo
+button: 👉 Pilih Layanan
 type: list
-list:
-  - title: Tarif import
-    description:
-    id: tarif
-    answer: "Tentu! Silakan pilih negara asal pengiriman Anda dari daftar di bawah ini:"
-    type: list
+sections:
+  - title: 👉 Pilih Layanan
     list:
-      - title: China
+      - title: 1. Tarif import
+        description:
+        id: tarif
+        answer: "Tentu aja! 😄 Yuk, pilih asal pengiriman kamu dari daftar berikut ini:"
+        button: Pilih Negara
+        type: list
+        sections:
+          - title: Negara
+            list:
+              - title: 🇨🇳  China
+                description: ""
+                id: tarif#china
+                answer: Terima kasih! 🎉 Mohon informasikan berat paket kamu *(dalam kg)* supaya kita bisa hitung tarif pengirimannya ya. 📦💰
+                type: list
+                button: Options
+                sections:
+                  - title: "Options"
+                    list:
+                      - title: 1Kg
+                        description: ""
+                        id: tarif#china#1kg
+                        header:
+                          type: text
+                          text: "1 kg dari China ke Jakarta adalah sebagai berikut: 📦🇨🇳➡️🇮🇩"
+                        answer: "🌊 *Laut*\n\nRp 85.000\n\n✈️ *Udara*\n*Reguler:* Rp 175.000\n*Ekspres:* Rp 195.000\n\nPilih opsi yang sesuai dengan kebutuhanmu, dan mari kita bantu pengirimannya! 🚀😊\n\n*Pengiriman Udara*\n\n*Reguler*\n\n- *Harga*: Rp175,000 per kg\n- *Durasi*: 10-12 hari\n- *Minimal pengiriman*: 10 kg\n*Ekspres*\n\n- *Harga*: Rp195,000 per kg\n*Pengiriman Laut*\n- *Harga :* Rp85,000 per kg\n\n💡 _Catatan_: Ini hanya simulasi tarif. Untuk informasi lebih lanjut atau memulai pengiriman, silakan hubungi kami lewat tombol di bawah ya! 👇"
+                        type: list
+                        sections:
+                          - title: Options
+                            list:
+                              - title: Chat Admin
+                                description:
+                                id: cs
+                                answer:
+                                type: cs
+                              - title: Kembali ke menu Utama
+                                description:
+                                id: init
+                                answer:
+                                type: init
+                      - title: 5Kg
+                        description:
+                        id: tarif#china#5kg
+                        header:
+                          type: text
+                          text: "5 kg dari China ke Jakarta adalah sebagai berikut: 📦🇨🇳➡️🇮🇩"
+                        answer: "🌊 *Laut*\n\nRp 425.000\n\n✈️ *Udara*\n*Reguler:* Rp 875.000\n*Ekspres:* Rp 1.950.000\n\nPilih opsi yang sesuai dengan kebutuhanmu, dan mari kita bantu pengirimannya! 🚀😊\n\n*Pengiriman Udara*\n\n*Reguler*\n\n- *Harga*: Rp175,000 per kg\n- *Durasi*: 10-12 hari\n- *Minimal pengiriman*: 10 kg\n*Ekspres*\n\n- *Harga*: Rp195,000 per kg\n*Pengiriman Laut*\n- *Harga :* Rp85,000 per kg\n\n💡 _Catatan_: Ini hanya simulasi tarif. Untuk informasi lebih lanjut atau memulai pengiriman, silakan hubungi kami lewat tombol di bawah ya! 👇"
+                        type: list
+                        sections:
+                          - title: Options
+                            list:
+                              - title: Chat Admin
+                                description:
+                                id: cs
+                                answer:
+                                type: cs
+                              - title: Kembali ke menu Utama
+                                description:
+                                id: init
+                                answer:
+                                type: init
+                      - title: 10Kg
+                        description:
+                        id: tarif#china#10kg
+                        header:
+                          type: text
+                          text: "10 kg dari China ke Jakarta adalah sebagai berikut: 📦🇨🇳➡️🇮🇩"
+                        answer: "🌊 *Laut*\n\nRp 850.000\n\n✈️ *Udara*\n*Reguler:* Rp 1.750.000\n*Ekspres:* Rp 1.950.000\n\nPilih opsi yang sesuai dengan kebutuhanmu, dan mari kita bantu pengirimannya! 🚀😊\n\n*Pengiriman Udara*\n\n*Reguler*\n\n- *Harga*: Rp175,000 per kg\n- *Durasi*: 10-12 hari\n- *Minimal pengiriman*: 10 kg\n*Ekspres*\n\n- *Harga*: Rp195,000 per kg\n*Pengiriman Laut*\n- *Harga :* Rp85,000 per kg\n\n💡 _Catatan_: Ini hanya simulasi tarif. Untuk informasi lebih lanjut atau memulai pengiriman, silakan hubungi kami lewat tombol di bawah ya! 👇"
+                        type: list
+                        sections:
+                          - title: Options
+                            list:
+                              - title: Chat Admin
+                                description: ""
+                                id: cs
+                                answer:
+                                type: cs
+                              - title: Kembali ke menu Utama
+                                description: ""
+                                id: init
+                                answer:
+                                type: init
+                  - title: kembali ke menu
+                    list:
+                      - title: Kembali ke menu
+                        description: ""
+                        id: tarif#china
+                        answer:
+                        type: "list"
+              - title: 🇸🇬  Singapura
+                description: ""
+                id: tarif#singapura
+                answer: ""
+                type: ""
+              - title: 🇰🇷 Korea
+                description: ""
+                id: tarif#korea
+                answer: ""
+                type: ""
+          - title: Kembali ke Menu
+            list:
+              - title: Kembali ke Menu
+                description: ""
+                answer: ""
+                type: "init"
+                id: "init"
+      - title: 2. Alamat Gudang
+        description:
+        id: alamat
+        answer: "Tentu! Silakan pilih negara asal pengiriman Anda dari daftar di bawah ini:"
+        type: list
+        button: Pilih Negara
+        sections:
+          - title: Negara
+            list:
+              - title: 🇨🇳  China
+                description: ""
+                id: alamat#china
+                answer: "Jalur Udara/Laut \n广州市白云区白云湖街唐阁路135号8栋（聚星产业园(66号仓)\n联系人：小赛\n联系号码：19166215391"
+                type: text
+              - title: 🇸🇬  Singapura
+                description: ""
+                id: alamat#singapura
+                answer:
+                  "Name: Norfa/Steven\nContact: +65 8869 8469\n\nAddress: Kallang Distripark\n1801
+                  Geylang Bahru Store \n4A-3\nSingapore 339709\n\nNotes:\nOperational hours 9.30
+                  sg - 4.00 sg\nMonday - Friday"
+                type: text
+              - title: 🇰🇷 Korea
+                description: ""
+                id: alamat#korea
+                answer:
+                  "Name:(IDN/SEO/KODE) 강성길 \nContact: 010-7286 0877\nAddress: 인천 중구 자유무역로
+                  164번길 N2블럭 3번 (MARKING)"
+                type: text
+          - title: Kembali ke Menu
+            list:
+              - title: Kembali ke Menu
+                description: ""
+                answer: ""
+                type: "init"
+                id: "init"
+      - title: 3. Konsultasi Layanan
         description: ""
-        id: tarif#china
-        answer:
-          Terima kasih! Mohon masukkan berat paket Anda (dalam kg) untuk menghitung
-          tarif pengiriman.
-        type: service
-        service_answer: "Tarif pengiriman untuk paket #INPUT dari China ke Indonesia adalah \n\n\n*Laut*\n\nRp 850.000\n\n*Udara *\n\n*Regular: Rp 1.750.000*\n\n*Ekspress: Rp 1.950.000*\n\n*Perhitungan diatas adalah simulasi. Untuk transaksi, silahkan hubungi kami melalui tombol dibawah*\n\n"
-        list:
-          - title: Detail Tarif
-            description: ""
-            answer: "Pengiriman udara\n\n*Reguler*:\n\n- *Harga*: Rp175,000 per kg\n- *Durasi*: 10-12 hari\n- *Minimal pengiriman*: 10 kg\n\n*Udara Ekspres*:\n\n- *Harga*: Rp195,000 per kg\n- *Durasi*: 6-8 hari\n\n\n*Pengiriman Laut*:\n- *Harga per kilogram (kg)*: Rp85,000 per kg\n"
-            type: "text"
-            id: "tarif#china#detail"
-          - title: Syarat & Ketentuan
-            description: ""
-            answer: "1.⁠ ⁠_Pengiriman Barang ke Gudang_:\n - Barang wajib diantar atau di-drop ke gudang.\n - Jika menggunakan kurir lokal, berikan foto resi pengirimannya kepada kami.\n2.⁠ ⁠_Penimbangan dan Pengukuran Akhir_:\n - _Kargoo_ akan melakukan penimbangan berat dan volume akhir.\n - Tagihan disesuaikan berdasarkan pengukuran oleh tim kami\n3.⁠ ⁠_Perhitungan Berat dan Tagihan_:\n - Dasar perhitungan berat diambil dari yang lebih besar antara berat aktual dan berat dimensi (rumus berat dimensi: Panjang x Lebar x Tinggi / 2.000).\n - Tagihan ditentukan dari penghitungan antara berat aktual dan berat volumetrik, mana yang lebih berat.\n - Minimal charge adalah 1 kg per pengiriman. Jika berat di bawah 1 kg tetap dikenakan charge 1 kg.\n - Berlaku pembulatan ke atas (misal, 3,1 kg menjadi 4 kg; 3,6 kg menjadi 4 kg).\n4.⁠ ⁠_Kemungkinan Keterlambatan_:\n - Jika terjadi delay karena cuaca, insiden di luar kendali kami, serta redline secara tiba-tiba di custom clearance bea cukai, maka kemungkinan akan ada keterlambatan barang tiba di Jakarta.\n5.⁠ ⁠_Kebijakan Klaim dan Kondisi Barang_:\n - Kami tidak menerima klaim atas pengiriman atau barang dengan kondisi berikut:\n - Tanpa packing atau packing tidak sesuai standar impor.\n - Aktual barang tidak sesuai dengan pernyataan pada dokumen impor maupun dokumen invoice dan packing list.\n - Barang dengan waktu expired tertentu, barang mudah pecah, rusak, bocor, atau karena sifat alami barang tersebut.\n - Keterlambatan diakibatkan oleh airlines, shipping line, redline, offload, atau bencana alam.\n - Barang rusak akibat unsur alam, bencana alam, atau force majeure lainnya.\n - Tidak ada marking yang jelas dan benar pada barang.\n\nDengan memahami ketentuan di atas, kami berharap proses pengiriman berjalan lancar dan sesuai dengan harapan Anda. Jika ada pertanyaan lebih lanjut, silakan hubungi tim kami.\n\n"
-            type: "text"
-            id: "tarif#china#syarat"
-          - title: Konsultasi Layanan
-            description: ""
-            answer: ""
-            type: "cs"
-            id: "cs"
-          - title: Ulangi
-            description: ""
-            answer: ""
-            type: "text"
-            id: "tarif#china"
-      - title: Singapura
-        description: ""
-        id: tarif#singapura
-        answer: ""
-        type: ""
-      - title: Korea
-        description: ""
-        id: tarif#korea
-        answer: ""
-        type: ""
-  - title: Alamat Gudang
-    description:
-    id: alamat
-    answer: "Tentu! Silakan pilih negara asal pengiriman Anda dari daftar di bawah ini:"
-    type: list
-    list:
-      - title: China
-        description: ""
-        id: alamat#china
-        answer: "Jalur Udara/Laut \n广州市白云区白云湖街唐阁路135号8栋（聚星产业园(66号仓)\n联系人：小赛\n联系号码：19166215391"
-        type: text
-      - title: Singapura
-        description: ""
-        id: alamat#singapura
-        answer:
-          "Name: Norfa/Steven\nContact: +65 8869 8469\n\nAddress: Kallang Distripark\n1801
-          Geylang Bahru Store \n4A-3\nSingapore 339709\n\nNotes:\nOperational hours 9.30
-          sg - 4.00 sg\nMonday - Friday"
-        type: text
-      - title: Korea
-        description: ""
-        id: alamat#korea
-        answer:
-          "Name:(IDN/SEO/KODE) 강성길 \nContact: 010-7286 0877\nAddress: 인천 중구 자유무역로
-          164번길 N2블럭 3번 (MARKING)"
-        type: text
-  - title: Konsultasi Layanan
-    description: ""
-    id: cs
-    answer: "Menghubungkan Anda dengan agen kami... \U0001F504"
-    type: cs
+        id: cs
+        answer: "Menghubungkan Anda dengan agen kami... \U0001F504"
+        type: cs

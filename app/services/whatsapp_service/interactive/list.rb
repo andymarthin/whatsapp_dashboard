@@ -18,9 +18,7 @@ module WhatsappService::Interactive
     def data
       {
         type: "list",
-        header: {
-          text: header
-        },
+        header:,
         body: {
           text: body
         },

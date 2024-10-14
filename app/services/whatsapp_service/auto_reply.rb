@@ -14,22 +14,26 @@ module WhatsappService
           initialize_bot
          end
       end
-      interactive_bot(questions["list"]) if message_type.eql?("interactive")
+      interactive_bot(questions["sections"]) if message_type.eql?("interactive")
     end
 
     private
 
     def initialize_bot
       message = questions["answer"]
-      send_list(questions["list"], message)
+      button = questions["button"]
+      footer = questions["footer"]
+      send_list(questions["sections"], message, button:, footer:)
     end
 
-    def send_list(list, message, button = "Options")
-      interactive = Interactive::List.call(build_sections(list), message, button)
+    def send_list(list, message, button: "Options", footer: nil, header: nil)
+      interactive = Interactive::List.call(build_sections(list), message, button, footer:, header:)
       Send::Interactive.call(phone_number, interactive)
     end
 
     def interactive_bot(list)
+      return initialize_bot if interactive_id.eql?("init")
+
       question = find_from_list(list, interactive_id)
       return unless question
 
@@ -40,12 +44,15 @@ module WhatsappService
         Send::Location.call(phone_number, latitude, longitude)
       when "cs"
         message = question["answer"]
-        room.update(bot: false)
+        room.update(bot: false, open_until: 24.hours.from_now)
         Send::Text.call(to: phone_number, text: message)
       when "list"
         message = question["answer"]
-        list = question["list"]
-        send_list(list, message)
+        list = question["sections"]
+        button = question["button"].presence
+        footer = question["footer"].presence
+        header = question["header"].presence
+        send_list(list, message, **{ button:, footer:, header: }.compact)
       else
         if question["type"].eql?("service")
           Kredis.hash(room.id).update(id: question["id"])
@@ -63,13 +70,13 @@ module WhatsappService
       @questions ||= YAML.load(bot_file)
     end
 
-    def build_sections(list, title: "Options")
-      [
+    def build_sections(sections, title: "Options")
+      sections.map do |section|
         {
-          title: title,
-          rows: section_rows(list)
+          title: section["title"],
+          rows: section_rows(section["list"])
         }
-      ]
+      end
     end
 
     def section_rows(list)
@@ -82,7 +89,9 @@ module WhatsappService
       end
     end
 
-    def find_from_list(list, id, prefix = "")
+    def find_from_list(sections, id, prefix = "")
+      list = sections.map { |section| section["list"] }
+      list.flatten!
       ids = id.split("#")
       current_id = "#{prefix}#{ids.shift}"
       result = list.find { |row| row["id"] == current_id }
@@ -91,8 +100,8 @@ module WhatsappService
 
       return result if ids.empty?
 
-      if result["list"]
-        find_from_list(result["list"], ids.join("#"), "#{current_id}#")
+      if result["sections"]
+        find_from_list(result["sections"], ids.join("#"), "#{current_id}#")
       else
         nil
       end
@@ -108,9 +117,9 @@ module WhatsappService
 
     def service_handle(data)
       current_session = data.to_h
-      question = find_from_list(questions["list"], current_session["id"])
+      question = find_from_list(questions["sections"], current_session["id"])
       service_answer = question["service_answer"]&.gsub("#INPUT", raw_message)
-      list = question["list"]
+      list = question["sections"]
       if list.present?
         send_list(list, service_answer)
       else

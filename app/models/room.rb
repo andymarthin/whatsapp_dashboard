@@ -18,7 +18,7 @@ class Room < ApplicationRecord
   has_many :messages, dependent: :destroy
   scope :open, -> { where(open_until: Time.zone.now...) }
   def open?
-    return false if open_until.nil?
+    return false if open_until.nil? || bot?
 
     Time.zone.now < open_until
   end
