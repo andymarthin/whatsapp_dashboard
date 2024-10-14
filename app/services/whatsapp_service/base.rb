@@ -40,10 +40,6 @@ module WhatsappService
       params.dig("messages", 0, "type")
     end
 
-    def bot_file
-      @bot_file ||= File.read(Rails.root.join("bot.json"))
-    end
-
     def room
       @room ||= Room.create_with(name: contact_name).find_or_create_by(from: phone_number)
     end

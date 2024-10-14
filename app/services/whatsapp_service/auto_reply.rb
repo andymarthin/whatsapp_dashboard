@@ -7,18 +7,17 @@ module WhatsappService
 
     def call
       initialize_bot if message_type.eql?("text") && room.bot?
-      interactive_bot(list) if message_type.eql?("interactive")
+      interactive_bot(question["list"]) if message_type.eql?("interactive")
     end
 
     private
 
     def initialize_bot
-      message = "hello what can i help you?"
-      button = "Select Question"
-      send_list(list, message, button)
+      message = question["answer"]
+      send_list(question["list"], message)
     end
 
-    def send_list(list, message, button)
+    def send_list(list, message, button = "Options")
       interactive = Interactive::List.call(build_sections(list), message, button)
       Send::Interactive.call(phone_number, interactive)
     end
@@ -33,22 +32,25 @@ module WhatsappService
         longitude = question.dig("options", "longitude")
         Send::Location.call(phone_number, latitude, longitude)
       when "cs"
-        message = "Please wait..."
+        message = question["answer"]
         room.update(bot: false)
         Send::Text.call(to: phone_number, text: message)
       when "list"
-        message = question["title"]
-        button = "Options"
+        message = question["answer"]
         list = question["list"]
-        send_list(list, message, button)
+        send_list(list, message)
       else
         answer = question["answer"]
-        Send::Text.call(to: phone_number, text: answer)
+        Send::Text.call(to: phone_number, text: answer) if answer.present?
       end
     end
 
-    def list
-      JSON.parse bot_file
+    def bot_file
+      @bot_file ||= File.open(Rails.root.join("bot.yaml"))
+    end
+
+    def question
+      @question ||= YAML.load(bot_file)
     end
 
     def build_sections(list, title: "Options")
