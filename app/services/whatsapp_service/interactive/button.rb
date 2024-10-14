@@ -17,9 +17,7 @@ module WhatsappService::Interactive
     def data
       {
         type: "button",
-        header: {
-          text: header
-        },
+        header: header,
         body: {
           text: body
         },

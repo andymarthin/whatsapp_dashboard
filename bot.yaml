@@ -4,6 +4,7 @@ description: ""
 id:
 answer: "👋 Halo! Selamat datang di layanan Pengiriman Kargoo Bagaimana kami bisa membantu Anda hari ini?\n\nIni adalah WhatsApp yang diotomatisasi, tidak ada orang yang mengoperasikan WhatsApp ini secara langsung.\n\nNamun anda dapat memilih bantuan melalui menu jika ingin terhubung dengan admin.\n\n"
 footer: Kargoo
+
 button: 👉 Pilih Layanan
 type: list
 sections:
@@ -30,9 +31,7 @@ sections:
                       - title: 1Kg
                         description: ""
                         id: tarif#china#1kg
-                        header:
-                          type: text
-                          text: "1 kg dari China ke Jakarta adalah sebagai berikut: 📦🇨🇳➡️🇮🇩"
+                        header: "1 kg dari China ke Jakarta adalah sebagai berikut: 📦🇨🇳➡️🇮🇩"
                         answer: "🌊 *Laut*\n\nRp 85.000\n\n✈️ *Udara*\n*Reguler:* Rp 175.000\n*Ekspres:* Rp 195.000\n\nPilih opsi yang sesuai dengan kebutuhanmu, dan mari kita bantu pengirimannya! 🚀😊\n\n*Pengiriman Udara*\n\n*Reguler*\n\n- *Harga*: Rp175,000 per kg\n- *Durasi*: 10-12 hari\n- *Minimal pengiriman*: 10 kg\n*Ekspres*\n\n- *Harga*: Rp195,000 per kg\n*Pengiriman Laut*\n- *Harga :* Rp85,000 per kg\n\n💡 _Catatan_: Ini hanya simulasi tarif. Untuk informasi lebih lanjut atau memulai pengiriman, silakan hubungi kami lewat tombol di bawah ya! 👇"
                         type: list
                         sections:
@@ -51,9 +50,7 @@ sections:
                       - title: 5Kg
                         description:
                         id: tarif#china#5kg
-                        header:
-                          type: text
-                          text: "5 kg dari China ke Jakarta adalah sebagai berikut: 📦🇨🇳➡️🇮🇩"
+                        header: "5 kg dari China ke Jakarta adalah sebagai berikut: 📦🇨🇳➡️🇮🇩"
                         answer: "🌊 *Laut*\n\nRp 425.000\n\n✈️ *Udara*\n*Reguler:* Rp 875.000\n*Ekspres:* Rp 1.950.000\n\nPilih opsi yang sesuai dengan kebutuhanmu, dan mari kita bantu pengirimannya! 🚀😊\n\n*Pengiriman Udara*\n\n*Reguler*\n\n- *Harga*: Rp175,000 per kg\n- *Durasi*: 10-12 hari\n- *Minimal pengiriman*: 10 kg\n*Ekspres*\n\n- *Harga*: Rp195,000 per kg\n*Pengiriman Laut*\n- *Harga :* Rp85,000 per kg\n\n💡 _Catatan_: Ini hanya simulasi tarif. Untuk informasi lebih lanjut atau memulai pengiriman, silakan hubungi kami lewat tombol di bawah ya! 👇"
                         type: list
                         sections:
@@ -72,9 +69,7 @@ sections:
                       - title: 10Kg
                         description:
                         id: tarif#china#10kg
-                        header:
-                          type: text
-                          text: "10 kg dari China ke Jakarta adalah sebagai berikut: 📦🇨🇳➡️🇮🇩"
+                        header: "10 kg dari China ke Jakarta adalah sebagai berikut: 📦🇨🇳➡️🇮🇩"
                         answer: "🌊 *Laut*\n\nRp 850.000\n\n✈️ *Udara*\n*Reguler:* Rp 1.750.000\n*Ekspres:* Rp 1.950.000\n\nPilih opsi yang sesuai dengan kebutuhanmu, dan mari kita bantu pengirimannya! 🚀😊\n\n*Pengiriman Udara*\n\n*Reguler*\n\n- *Harga*: Rp175,000 per kg\n- *Durasi*: 10-12 hari\n- *Minimal pengiriman*: 10 kg\n*Ekspres*\n\n- *Harga*: Rp195,000 per kg\n*Pengiriman Laut*\n- *Harga :* Rp85,000 per kg\n\n💡 _Catatan_: Ini hanya simulasi tarif. Untuk informasi lebih lanjut atau memulai pengiriman, silakan hubungi kami lewat tombol di bawah ya! 👇"
                         type: list
                         sections:

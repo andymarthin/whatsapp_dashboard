@@ -21,9 +21,10 @@ module WhatsappService
 
     def initialize_bot
       message = questions["answer"]
-      button = questions["button"]
-      footer = questions["footer"]
-      send_list(questions["sections"], message, button:, footer:)
+      button = questions["button"].presence
+      footer = questions["footer"].presence
+      header = questions["header"].presence
+      send_list(questions["sections"], message, **{ button:, footer:, header: }.compact)
     end
 
     def send_list(list, message, button: "Options", footer: nil, header: nil)
