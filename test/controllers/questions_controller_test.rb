@@ -7,7 +7,7 @@ class QuestionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get tree" do
-    get questions_tree_url
+    get tree_questions_url
     assert_response :success
   end
 end
