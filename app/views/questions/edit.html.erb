@@ -1,13 +1,13 @@
 <%= turbo_frame_tag :remote_modal do %>
-  <%= simple_form_for @question, data: {controller: "question-form"} do |f|%>
+  <%= simple_form_for @question, data: { controller: "question-form" } do |f| %>
     <%= render ModalComponent.new(size: :large) do |modal| %>
-      <%= modal.with_header_content("Edit Question: #{@question.name}")%>
+      <%= modal.with_header_content("Edit Question: #{@question.name}") %>
       <%= modal.with_body do %>
-        <%= render partial: 'form', locals: {f: f, parent: @parent} %>
+        <%= render partial: "form", locals: { f: f, parent: @parent } %>
       <% end %>
       <%= modal.with_footer do %>
         <%= f.button :submit %>
       <% end %>
-    <% end%>
+    <% end %>
   <% end %>
 <% end %>

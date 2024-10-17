@@ -55,7 +55,6 @@ class Question < ApplicationRecord
   end
   private
 
-
   def set_level
     self.level = (parent&.level || 0) + 1
   end

@@ -1,4 +1,4 @@
-<%= f.input :parent_id, as: :hidden, input_html: {value: params[:parent_id]} if params[:parent_id] %>
+<%= f.input :parent_id, as: :hidden, input_html: { value: params[:parent_id] } if params[:parent_id] %>
 <%= f.input :name %>
 <% if parent.present? %>
   <%= f.input :title, required: f.object.parent_list_or_buttons? %>
@@ -15,4 +15,4 @@
 <div data-question-form-target="answer">
   <%= f.input :answer %>
 </div>
-<%= f.input :question_type, as: :enum, input_html: {data: {action: "change->question-form#typeChanged", question_form_target: "questionType"}} %>
+<%= f.input :question_type, as: :enum, input_html: { data: { action: "change->question-form#typeChanged", question_form_target: "questionType" } } %>
