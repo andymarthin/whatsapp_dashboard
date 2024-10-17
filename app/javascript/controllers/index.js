@@ -10,5 +10,8 @@ application.register("chat", ChatController)
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
 
+import QuestionFormController from "./question_form_controller"
+application.register("question-form", QuestionFormController)
+
 import TreeController from "./tree_controller"
 application.register("tree", TreeController)

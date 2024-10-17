@@ -1,8 +1,20 @@
 <%= f.input :parent_id, as: :hidden, input_html: {value: params[:parent_id]} if params[:parent_id] %>
-<%= f.input :name %>
-<%= f.input :title %>
-<%= f.input :description %>
-<%= f.input :body %>
-<%= f.input :footer %>
-<%= f.input :answer %>
-<%= f.input :question_type, as: :enum %>
+<div data-question-form-target="name">
+  <%= f.input :name %>
+</div>
+<div data-question-form-target="title" class="hidden">
+  <%= f.input :title %>
+</div>
+<div data-question-form-target="description" class="hidden">
+  <%= f.input :description %>
+</div>
+<div data-question-form-target="body">
+  <%= f.input :body %>
+</div>
+<div data-question-form-target="footer">
+  <%= f.input :footer %>
+</div>
+<div data-question-form-target="answer">
+  <%= f.input :answer %>
+</div>
+<%= f.input :question_type, as: :enum, input_html: { data: {action: "change->question-form#typeChange", question_form_target: "questionType" }} %>
