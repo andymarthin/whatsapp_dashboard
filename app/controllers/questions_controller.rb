@@ -4,7 +4,8 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
+    @parent = Question.find_by(id: params[:parent_id])
+    @question = Question.new(parent: @parent)
   end
 
   def tree
@@ -35,6 +36,7 @@ class QuestionsController < ApplicationController
   end
 
   def edit
+    @parent = @question.parent
   end
 
   private

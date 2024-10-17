@@ -2,23 +2,22 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="question-form"
 export default class extends Controller {
-  static targets = ["title", "description", "questionType"];
+  static targets = ["footer", "body", "answer", "questionType"];
   connect() {
     this.showOrHide(this.questionTypeTarget);
   }
 
-  typeChange(event) {
+  typeChanged(event) {
     this.showOrHide(event.target);
   }
 
   showOrHide(target) {
     const selected = target.value;
-    if (["list", "list_buttons"].includes(selected)) {
-      this.show(this.titleTarget);
-      this.show(this.descriptionTarget);
+    const targets = [this.footerTarget, this.bodyTarget, this.answerTarget];
+    if (["main_menu", "cs", "previous_menu"].includes(selected)) {
+      targets.forEach((target) => this.hide(target));
     } else {
-      this.hide(this.titleTarget);
-      this.hide(this.descriptionTarget);
+      targets.forEach((target) => this.show(target));
     }
   }
 

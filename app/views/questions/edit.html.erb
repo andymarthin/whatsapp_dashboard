@@ -3,7 +3,7 @@
     <%= render ModalComponent.new(size: :large) do |modal| %>
       <%= modal.with_header_content("Edit Question: #{@question.name}")%>
       <%= modal.with_body do %>
-        <%= render partial: 'form', locals: {f: f} %>
+        <%= render partial: 'form', locals: {f: f, parent: @parent} %>
       <% end %>
       <%= modal.with_footer do %>
         <%= f.button :submit %>

@@ -1,13 +1,11 @@
 <%= f.input :parent_id, as: :hidden, input_html: {value: params[:parent_id]} if params[:parent_id] %>
-<div data-question-form-target="name">
-  <%= f.input :name %>
-</div>
-<div data-question-form-target="title" class="hidden">
-  <%= f.input :title %>
-</div>
-<div data-question-form-target="description" class="hidden">
-  <%= f.input :description %>
-</div>
+<%= f.input :name %>
+<% if parent.present? %>
+  <%= f.input :title, required: f.object.parent_list_or_buttons? %>
+  <% if parent.question_type.eql?("list") %>
+    <%= f.input :description %>
+  <% end %>
+<% end %>
 <div data-question-form-target="body">
   <%= f.input :body %>
 </div>
@@ -17,4 +15,4 @@
 <div data-question-form-target="answer">
   <%= f.input :answer %>
 </div>
-<%= f.input :question_type, as: :enum, input_html: { data: {action: "change->question-form#typeChange", question_form_target: "questionType" }} %>
+<%= f.input :question_type, as: :enum, input_html: {data: {action: "change->question-form#typeChanged", question_form_target: "questionType"}} %>
