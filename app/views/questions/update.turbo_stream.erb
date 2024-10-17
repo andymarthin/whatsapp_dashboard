@@ -1,0 +1,4 @@
+<%= turbo_stream.replace @question do %>
+  <%= render QuestionNodeComponent.new(question: @question) %>
+<% end %>
+<%= reset_modal_frame%>

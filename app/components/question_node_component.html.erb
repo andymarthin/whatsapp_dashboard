@@ -1,13 +1,23 @@
-<li>
-  <div class="treeview__level" data-level="A">
-    <span class="level-title">Level A</span>
+<li id="<%= dom_id(question) %>">
+  <div class="treeview__level" data-level="<%= question.level_alphabet %>">
+    <span class="level-title"><%= link_to question.name, edit_question_path(question), data: {turbo_frame: :remote_modal} %></span>
     <div class="treeview__level-btns">
-      <div class="btn btn-default btn-sm level-add"><span class="fa fa-plus"></span></div>
-      <div class="btn btn-default btn-sm level-remove"><span class="fa fa-trash text-danger"></span></div>
-      <div class="btn btn-default btn-sm level-same"><span>Add Same Level</span></div>
-      <div class="btn btn-default btn-sm level-sub"><span>Add Sub Level</span></div>
+      <% if ["list", "list_buttons"].include?(question.question_type) %>
+        <div class="btn btn-default btn-sm level-add">
+          <%= link_to new_question_path(parent_id: question.id), data: {turbo_frame: :remote_modal} do %>
+            <span>
+              <svg class="w-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+              </svg>
+            </span>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
-  <ul>
+  <ul id="<%= question.node_id %>">
+    <% question.children.each do |child| %>
+      <%= render QuestionNodeComponent.new(question: child) %>
+    <% end %>
   </ul>
 </li>

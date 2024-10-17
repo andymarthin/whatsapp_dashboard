@@ -41,6 +41,8 @@ group :development do
   gem "erb_lint", require: false
   gem "annotate"
   gem "web-console"
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 group :test do

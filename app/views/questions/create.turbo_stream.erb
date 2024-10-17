@@ -1,1 +1,5 @@
 <%= turbo_stream.remove "add-question" %>
+<%= turbo_stream.append @question.parent_node_id do %>
+  <%= render QuestionNodeComponent.new(question: @question) %>
+<% end %>
+<%= reset_modal_frame%>

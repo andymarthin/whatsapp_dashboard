@@ -7,6 +7,7 @@ module.exports = {
     "./app/javascript/**/*.js",
     "./node_modules/flowbite/**/*.js",
     "./config/initializers/simple_form.rb",
+    "./app/inputs/**/*.rb",
   ],
   plugins: [require("flowbite/plugin")],
 };

@@ -1,3 +1,8 @@
+<%= f.input :parent_id, as: :hidden, input_html: {value: params[:parent_id]} if params[:parent_id] %>
 <%= f.input :name %>
 <%= f.input :title %>
 <%= f.input :description %>
+<%= f.input :body %>
+<%= f.input :footer %>
+<%= f.input :answer %>
+<%= f.input :question_type, as: :enum %>

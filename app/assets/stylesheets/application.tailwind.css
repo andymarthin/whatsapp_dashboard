@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .treeview .btn-default {
-  @apply border-[#e3e5ef] hover:bg-[#f7faea] hover:text-[#bada55];
+  @apply border-[#e3e5ef]  hover:text-[#bada55];
 }
 .treeview ul {
   @apply pl-8;
@@ -79,4 +79,19 @@
 }
 .treeview--mapview ul li:after {
   @apply content-[unset];
+}
+
+.btn-group-sm > .btn,
+.btn-sm {
+  @apply text-xs leading-normal px-2.5 py-[5px] rounded-[3px];
+}
+.btn-default {
+  @apply dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700;
+}
+.btn {
+  @apply inline-block text-sm font-normal leading-[1.42857143] text-center whitespace-nowrap align-middle touch-manipulation cursor-pointer select-none bg-none border rounded mb-0 px-3 py-1.5 border-solid border-transparent;
+  -ms-touch-action: manipulation;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }

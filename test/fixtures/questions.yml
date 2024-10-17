@@ -7,6 +7,7 @@
 #  body          :text
 #  description   :string
 #  footer        :string
+#  level         :integer          default(0)
 #  name          :string
 #  question_type :integer
 #  status        :integer

@@ -1,12 +1,12 @@
 <%= turbo_frame_tag :remote_modal do %>
-  <%= render ModalComponent.new(size: :large) do |modal| %>
-    <%= simple_form_for @question do |f|%>
+  <%= simple_form_for @question do |f|%>
+    <%= render ModalComponent.new(size: :large) do |modal| %>
       <%= modal.with_header_content("Add Question")%>
       <%= modal.with_body do %>
         <%= render partial: 'form', locals: {f: f} %>
       <% end %>
       <%= modal.with_footer do %>
-        <h1>Footer</h1>
+        <%= f.button :submit %>
       <% end %>
     <% end%>
   <% end %>
