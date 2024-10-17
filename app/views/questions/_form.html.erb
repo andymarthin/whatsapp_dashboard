@@ -3,22 +3,22 @@
 <% if parent.present? %>
   <div data-controller="character-counter" data-character-counter-countdown-value="true">
     <%= f.input :title, required: f.object.parent_list_or_buttons?, input_html: { data: { character_counter_target: "input" }, maxlength: 24 } %>
-    <span class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</span>
+    <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
   </div>
   <% if parent.question_type.eql?("list") %>
     <div data-controller="character-counter" data-character-counter-countdown-value="true">
       <%= f.input :description, input_html: { data: { character_counter_target: "input" }, maxlength: 72 } %>
-      <span class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</span>
+      <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
     </div>
   <% end %>
 <% end %>
 <div data-question-form-target="body" data-controller="character-counter" data-character-counter-countdown-value="true">
   <%= f.input :body, input_html: { data: { character_counter_target: "input" }, maxlength: 1024 } %>
-  <span class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</span>
+  <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
 </div>
 <div data-question-form-target="footer" data-controller="character-counter" data-character-counter-countdown-value="true">
   <%= f.input :footer, input_html: { data: { character_counter_target: "input" }, maxlength: 60 } %>
-  <span class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</span>
+  <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
 </div>
 <div data-question-form-target="answer">
   <%= f.input :answer %>

@@ -7,6 +7,9 @@ import { application } from "./application";
 import AlertController from "./alert_controller";
 application.register("alert", AlertController);
 
+import CharacterCounter from "@stimulus-components/character-counter";
+application.register("character-counter", CharacterCounter);
+
 import ChatController from "./chat_controller";
 application.register("chat", ChatController);
 
