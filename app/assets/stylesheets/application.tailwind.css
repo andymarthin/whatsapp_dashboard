@@ -29,7 +29,7 @@
   @apply pl-[34px];
 }
 .treeview__level {
-  @apply inline-block font-bold border relative z-[1] pl-[42.5px] p-[7px] rounded-[5px] border-solid border-[#e3e5ef] before:content-[attr(data-level)] before:absolute before:left-[-27.5px] before:top-[-6.5px] before:flex before:items-center before:justify-center before:h-[55px] before:w-[55px] before:bg-[#bada55] before:text-white before:text-xl before:rounded-[50%] before:border-[7.5px] before:border-solid before:border-[#eef6d5];
+  @apply inline-block font-bold border relative z-[1] pl-[35.5px] p-[7px] pt-[1px] rounded-[5px] border-solid border-[#e3e5ef] before:content-[attr(data-level)] before:absolute before:left-[-27.5px] before:top-[-5px] before:flex before:items-center before:justify-center before:h-[55px] before:w-[55px] before:bg-[#bada55] before:text-white before:text-xl before:rounded-[50%] before:border-[7.5px] before:border-solid before:border-[#eef6d5];
 }
 .treeview__level-btns {
   @apply inline-block relative ml-[15px];
