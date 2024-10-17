@@ -4,6 +4,9 @@
 
 import { application } from "./application";
 
+import AlertController from "./alert_controller";
+application.register("alert", AlertController);
+
 import ChatController from "./chat_controller";
 application.register("chat", ChatController);
 
@@ -15,6 +18,3 @@ application.register("question-form", QuestionFormController);
 
 import TreeController from "./tree_controller";
 application.register("tree", TreeController);
-
-import CharacterCounter from "@stimulus-components/character-counter";
-application.register("character-counter", CharacterCounter);
