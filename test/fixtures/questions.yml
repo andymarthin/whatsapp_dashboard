@@ -1,0 +1,45 @@
+# == Schema Information
+#
+# Table name: questions
+#
+#  id            :bigint           not null, primary key
+#  answer        :text
+#  body          :text
+#  description   :string
+#  footer        :string
+#  name          :string
+#  question_type :integer
+#  status        :integer
+#  title         :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  parent_id     :bigint
+#
+# Indexes
+#
+#  index_questions_on_parent_id  (parent_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (parent_id => questions.id)
+#
+
+one:
+  name: MyString
+  title: MyString
+  description: MyString
+  body: MyText
+  question_type: 1
+  status: 1
+  footer: MyString
+  answer: MyText
+
+two:
+  name: MyString
+  title: MyString
+  description: MyString
+  body: MyText
+  question_type: 1
+  status: 1
+  footer: MyString
+  answer: MyText

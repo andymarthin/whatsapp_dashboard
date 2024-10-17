@@ -1,3 +1,82 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.treeview .btn-default {
+  @apply border-[#e3e5ef] hover:bg-[#f7faea] hover:text-[#bada55];
+}
+.treeview ul {
+  @apply pl-8;
+  list-style: none;
+}
+.treeview ul li {
+  @apply relative pl-[35px] pr-0 pt-[50px] pb-0 before:content-[""] before:absolute before:top-[-26px] before:left-[-31px] before:w-px before:h-full before:border-l-2 before:border-l-[#a2a5b5] before:border-dashed after:content-[""] after:absolute after:left-[-30px] after:w-[65px] after:border-t-2 after:border-t-[#a2a5b5] after:border-dashed after:top-[70px] last:before:top-[-22px] last:before:h-[90px];
+}
+.treeview > ul > li:after,
+.treeview > ul > li:last-child:before {
+  @apply content-[unset];
+}
+.treeview > ul > li:before {
+  @apply left-9 top-[90px];
+}
+.treeview > ul > li:not(:last-child) > ul > li:before {
+  @apply content-[unset];
+}
+.treeview > ul > li > .treeview__level:before {
+  @apply h-[60px] w-[60px] top-[-9.5px] bg-[#54a6d9] text-[22px] border-[7.5px] border-solid border-[#d5e9f6];
+}
+.treeview > ul > li > ul {
+  @apply pl-[34px];
+}
+.treeview__level {
+  @apply inline-block font-bold border relative z-[1] pl-[42.5px] p-[7px] rounded-[5px] border-solid border-[#e3e5ef] before:content-[attr(data-level)] before:absolute before:left-[-27.5px] before:top-[-6.5px] before:flex before:items-center before:justify-center before:h-[55px] before:w-[55px] before:bg-[#bada55] before:text-white before:text-xl before:rounded-[50%] before:border-[7.5px] before:border-solid before:border-[#eef6d5];
+}
+.treeview__level-btns {
+  @apply inline-block relative ml-[15px];
+}
+.treeview__level .level-same,
+.treeview__level .level-sub {
+  @apply absolute hidden transition-opacity duration-[250ms] ease-[cubic-bezier(0.7,0,0.3,1)];
+}
+.treeview__level .level-same.in,
+.treeview__level .level-sub.in {
+  @apply block;
+}
+.treeview__level .level-same.in .btn-default,
+.treeview__level .level-sub.in .btn-default {
+  @apply bg-[#faeaea] text-[#da5555];
+}
+.treeview__level .level-same {
+  @apply left-[45px] top-0;
+}
+.treeview__level .level-sub {
+  @apply left-0 top-[42px];
+}
+.treeview__level .level-remove {
+  @apply hidden;
+}
+.treeview__level.selected {
+  @apply bg-[#f9f9fb] shadow-[0px_3px_15px_0px_rgba(0,0,0,0.10)];
+}
+.treeview__level.selected .level-remove {
+  @apply inline-block;
+}
+.treeview__level.selected .level-add {
+  @apply hidden;
+}
+.treeview__level.selected .level-same,
+.treeview__level.selected .level-sub {
+  @apply hidden;
+}
+.treeview .level-title {
+  @apply cursor-pointer select-none hover:underline text-white;
+}
+.treeview--mapview ul {
+  @apply justify-center flex;
+}
+.treeview--mapview ul li:before {
+  @apply content-[unset];
+}
+.treeview--mapview ul li:after {
+  @apply content-[unset];
+}

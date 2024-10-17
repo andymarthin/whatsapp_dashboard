@@ -27,6 +27,7 @@ gem "pagy"
 gem "kredis"
 gem "faraday-multipart"
 gem "marcel"
+gem "simple_form"
 
 
 group :development, :test do

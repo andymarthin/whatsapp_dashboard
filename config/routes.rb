@@ -20,6 +20,11 @@ Rails.application.routes.draw do
       post :end_session
     end
   end
+  resources :questions do
+    collection do
+      get :tree
+    end
+  end
   namespace :webhook do
     resource :whatsapp, only: %i[create show]
   end
