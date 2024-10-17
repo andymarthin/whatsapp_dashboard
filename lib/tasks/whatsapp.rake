@@ -7,8 +7,10 @@ namespace :whatsapp do
   desc "Register Phone Number"
   task register: :environment do
     pin = ENV["pin"]
-    raise "Pin is required" unless pin
-
-    WhatsappService::Registration::Register.call(pin)
+    if pin.present?
+      WhatsappService::Registration::Register.call(pin)
+    else
+      puts "Pin is required"
+    end
   end
 end
