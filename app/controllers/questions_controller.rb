@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: %i[update edit]
+  before_action :set_question, only: %i[update edit destroy]
   def index
   end
 
@@ -32,6 +32,17 @@ class QuestionsController < ApplicationController
       end
     else
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @question.destroy
+      respond_to do |format|
+        format.html { redirect_to questions_path_path }
+        format.turbo_stream
+      end
+    else
+      redirect_to questions_path_path, status: :unprocessable_entity
     end
   end
 
