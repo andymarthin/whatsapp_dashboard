@@ -18,10 +18,6 @@ module WhatsappService::Interactive
     def data
       {
         type: "list",
-        header: {
-          type: "text",
-          text: header
-        },
         body: {
           text: body
         },
@@ -31,7 +27,19 @@ module WhatsappService::Interactive
         action: {
           button:,
           sections:
-        }
+        },
+        **build_header
+      }
+    end
+
+    def build_header
+      return {} unless header
+
+      {
+        header: {
+          type: "text",
+          text: header
+          }
       }
     end
   end

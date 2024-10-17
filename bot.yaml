@@ -4,7 +4,6 @@ description: ""
 id:
 answer: "👋 Halo! Selamat datang di layanan Pengiriman Kargoo Bagaimana kami bisa membantu Anda hari ini?\n\nIni adalah WhatsApp yang diotomatisasi, tidak ada orang yang mengoperasikan WhatsApp ini secara langsung.\n\nNamun anda dapat memilih bantuan melalui menu jika ingin terhubung dengan admin.\n\n"
 footer: Kargoo
-
 button: 👉 Pilih Layanan
 type: list
 sections:
