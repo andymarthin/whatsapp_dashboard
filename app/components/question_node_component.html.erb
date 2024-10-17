@@ -3,15 +3,15 @@
     <span class="level-title"><%= link_to question.name, edit_question_path(question), data: {turbo_frame: :remote_modal} %></span>
     <div class="treeview__level-btns">
       <% if ["list", "list_buttons"].include?(question.question_type) %>
-        <div class="btn btn-default btn-sm level-add">
-          <%= link_to new_question_path(parent_id: question.id), data: {turbo_frame: :remote_modal} do %>
+        <%= link_to new_question_path(parent_id: question.id), data: {turbo_frame: :remote_modal} do %>
+          <div class="btn btn-default btn-sm level-add">
             <span>
               <svg class="w-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
               </svg>
             </span>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>

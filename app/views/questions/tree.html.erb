@@ -1,4 +1,4 @@
-<div class="treeview js-treeview">
+<div class="treeview js-treeview" data-turbo-prefetch="false">
   <ul id="questions">
     <%= render QuestionNodeComponent.new(question: @question) %>
   </ul>
