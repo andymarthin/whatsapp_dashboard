@@ -15,3 +15,6 @@ application.register("question-form", QuestionFormController);
 
 import TreeController from "./tree_controller";
 application.register("tree", TreeController);
+
+import CharacterCounter from "@stimulus-components/character-counter";
+application.register("character-counter", CharacterCounter);

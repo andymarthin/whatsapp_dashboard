@@ -318,6 +318,11 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
+"@stimulus-components/character-counter@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/character-counter/-/character-counter-5.0.0.tgz#9a1e9e88d2893212270bda7e254a5b80d0081b0f"
+  integrity sha512-oMXJ6B6qtV6FRmLa6riMNn/7Nym1m0RxN9q4Vv3KrVOlfXBZlHxAwGpCfC4+sIEKwTl08bWj1iDry97kdzF9nA==
+
 "@types/eslint@^9.6.1":
   version "9.6.1"
   resolved "https://registry.yarnpkg.com/@types/eslint/-/eslint-9.6.1.tgz#d5795ad732ce81715f27f75da913004a56751584"

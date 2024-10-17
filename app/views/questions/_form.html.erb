@@ -1,16 +1,24 @@
 <%= f.input :parent_id, as: :hidden, input_html: { value: params[:parent_id] } if params[:parent_id] %>
 <%= f.input :name %>
 <% if parent.present? %>
-  <%= f.input :title, required: f.object.parent_list_or_buttons? %>
+  <div data-controller="character-counter" data-character-counter-countdown-value="true">
+    <%= f.input :title, required: f.object.parent_list_or_buttons?, input_html: { data: { character_counter_target: "input" }, maxlength: 24 } %>
+    <span class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</span>
+  </div>
   <% if parent.question_type.eql?("list") %>
-    <%= f.input :description %>
+    <div data-controller="character-counter" data-character-counter-countdown-value="true">
+      <%= f.input :description, input_html: { data: { character_counter_target: "input" }, maxlength: 72 } %>
+      <span class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</span>
+    </div>
   <% end %>
 <% end %>
-<div data-question-form-target="body">
-  <%= f.input :body %>
+<div data-question-form-target="body" data-controller="character-counter" data-character-counter-countdown-value="true">
+  <%= f.input :body, input_html: { data: { character_counter_target: "input" }, maxlength: 1024 } %>
+  <span class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</span>
 </div>
-<div data-question-form-target="footer">
-  <%= f.input :footer %>
+<div data-question-form-target="footer" data-controller="character-counter" data-character-counter-countdown-value="true">
+  <%= f.input :footer, input_html: { data: { character_counter_target: "input" }, maxlength: 60 } %>
+  <span class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</span>
 </div>
 <div data-question-form-target="answer">
   <%= f.input :answer %>

@@ -26,6 +26,7 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.10",
+    "@stimulus-components/character-counter": "^5.0.0",
     "autoprefixer": "^10.4.20",
     "flowbite": "^2.5.2",
     "postcss": "^8.4.47",
