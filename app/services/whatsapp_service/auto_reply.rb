@@ -50,6 +50,8 @@ module WhatsappService
         Send::Text.call(to: phone_number, text: message)
       when "list"
         send_list(question)
+      when "list_buttons"
+        nil
       when previous_menu
         parent = question.parent
         interactive_bot(parent)
