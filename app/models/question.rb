@@ -29,8 +29,8 @@
 #  fk_rails_...  (section_id => sections.id)
 #
 class Question < ApplicationRecord
-  has_many :children, class_name: "Question", foreign_key: "parent_id", dependent: :destroy
-  has_many :sections, dependent: :destroy
+  has_many :children, -> { order(:id) }, class_name: "Question", foreign_key: "parent_id", dependent: :destroy
+  has_many :sections, -> { order(:id) }, dependent: :destroy
   belongs_to :parent, class_name: "Question", optional: true
   belongs_to :section, optional: true
   validates_presence_of :question_type, :name

@@ -21,20 +21,21 @@ module WhatsappService
 
     def initialize_bot
       question = Question.first
+      interactive_bot(question)
+    end
+
+    def send_list(question)
       footer = question.footer
       button = question.button
       message = question.body
-      send_list(question.sections, message, **{ button:, footer: }.compact)
-    end
-
-    def send_list(list, message, button: "Options", footer: nil, header: nil)
-      interactive = Interactive::List.call(build_sections(list.order(id: :asc)), message, button, footer:, header:)
+      list = question.sections.includes(:questions)
+      interactive = Interactive::List.call(build_sections(list), message, button, footer:)
       Send::Interactive.call(phone_number, interactive)
     end
 
     def interactive_bot(question = nil)
-      question = question ? question : Question.find_by(id: interactive_id)
-      return initialize_bot if question.main_menu?
+      question ||= Question.find_by(id: interactive_id)
+      return initialize_bot if question&.main_menu?
 
       return unless question
 
@@ -48,11 +49,7 @@ module WhatsappService
         room.update(bot: false, open_until: 24.hours.from_now)
         Send::Text.call(to: phone_number, text: message)
       when "list"
-        list = question.sections
-        footer = question.footer
-        button = question.button
-        message = question.body
-        send_list(list, message, **{ button:, footer: }.compact)
+        send_list(question)
       when previous_menu
         parent = question.parent
         interactive_bot(parent)
@@ -75,7 +72,7 @@ module WhatsappService
     end
 
     def section_rows(list)
-      list.order(id: :asc).map do |question|
+      list.map do |question|
         {
           id: question.id,
           title: question.title,

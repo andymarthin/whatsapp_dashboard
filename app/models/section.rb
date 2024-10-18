@@ -18,7 +18,7 @@
 #
 class Section < ApplicationRecord
   belongs_to :question
-  has_many :questions, dependent: :destroy
+  has_many :questions, -> { order(:id) }, dependent: :destroy
 
   def node_id
     "section_#{id}_rows"
