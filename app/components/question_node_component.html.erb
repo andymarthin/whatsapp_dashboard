@@ -1,4 +1,4 @@
-<li id="<%= dom_id(question) %>" data-accordion="collapse">
+<li id="<%= dom_id(question) %>" data-accordion="open">
   <div class="treeview__level" data-level="<%= question.level_alphabet %>">
     <div class="flex justify-between xl:block 2xl:flex align-center 2xl:space-x-4 h-full mt-2">
       <div class="flex space-x-4 xl:mb-4 2xl:mb-0">
@@ -8,7 +8,7 @@
               <%= question.name %>
             </p>
           <% end %>
-          <p class="text-xs font-medium text-gray-500 dark:text-gray-400"><%= question.question_type.titleize %></p>
+          <p data-accordion-icon class="text-xs font-medium text-gray-500 dark:text-gray-400" id="<%= "#{question.node_id}_heading" %>"><%= question.question_type.titleize %></p>
         </div>
       </div>
       <div class="inline-flex items-center w-auto xl:w-full 2xl:w-auto">
@@ -32,7 +32,7 @@
       </div>
     </div>
   </div>
-  <ul id="<%= question.node_id %>" class="pl-[34px]">
+  <ul id="<%= question.node_id %>" aria-labelledby="<%= "#{question.node_id}_heading" %>" class="pl-[34px]">
     <% if question.list? %>
       <% sections.each do |section| %>
         <%= render SectionComponent.new(section:) %>

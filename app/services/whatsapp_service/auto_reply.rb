@@ -14,97 +14,73 @@ module WhatsappService
           initialize_bot
          end
       end
-      interactive_bot(questions["sections"]) if message_type.eql?("interactive")
+      interactive_bot if message_type.eql?("interactive")
     end
 
     private
 
     def initialize_bot
-      message = questions["answer"]
-      button = questions["button"].presence
-      footer = questions["footer"].presence
-      header = questions["header"].presence
-      send_list(questions["sections"], message, **{ button:, footer:, header: }.compact)
+      question = Question.first
+      footer = question.footer
+      button = question.button
+      message = question.body
+      send_list(question.sections, message, **{ button:, footer: }.compact)
     end
 
     def send_list(list, message, button: "Options", footer: nil, header: nil)
-      interactive = Interactive::List.call(build_sections(list), message, button, footer:, header:)
+      interactive = Interactive::List.call(build_sections(list.order(id: :asc)), message, button, footer:, header:)
       Send::Interactive.call(phone_number, interactive)
     end
 
-    def interactive_bot(list)
-      return initialize_bot if interactive_id.eql?("init")
+    def interactive_bot(question = nil)
+      question = question ? question : Question.find_by(id: interactive_id)
+      return initialize_bot if question.main_menu?
 
-      question = find_from_list(list, interactive_id)
       return unless question
 
-      case question["type"]
+      case question.question_type
       when "location"
         latitude = question.dig("options", "latitude")
         longitude = question.dig("options", "longitude")
         Send::Location.call(phone_number, latitude, longitude)
       when "cs"
-        message = question["answer"]
+        message = question.body
         room.update(bot: false, open_until: 24.hours.from_now)
         Send::Text.call(to: phone_number, text: message)
       when "list"
-        message = question["answer"]
-        list = question["sections"]
-        button = question["button"].presence
-        footer = question["footer"].presence
-        header = question["header"].presence
-        send_list(list, message, **{ button:, footer:, header: }.compact)
+        list = question.sections
+        footer = question.footer
+        button = question.button
+        message = question.body
+        send_list(list, message, **{ button:, footer: }.compact)
+      when previous_menu
+        parent = question.parent
+        interactive_bot(parent)
       else
         if question["type"].eql?("service")
           Kredis.hash(room.id).update(id: question["id"])
         end
-        answer = question["answer"]
+        answer = question.body
         Send::Text.call(to: phone_number, text: answer) if answer.present?
       end
-    end
-
-    def bot_file
-      @bot_file ||= File.open(Rails.root.join("bot.yaml"))
-    end
-
-    def questions
-      @questions ||= YAML.load(bot_file)
     end
 
     def build_sections(sections, title: "Options")
       sections.map do |section|
         {
-          title: section["title"],
-          rows: section_rows(section["list"])
+          title: section.title,
+          rows: section_rows(section.questions)
         }
       end
     end
 
     def section_rows(list)
-      list.map do |row|
+      list.order(id: :asc).map do |question|
         {
-          id: row["id"],
-          title: row["title"],
-          description: row["description"]
+          id: question.id,
+          title: question.title,
+          description: question.description
         }
-      end
-    end
-
-    def find_from_list(sections, id, prefix = "")
-      list = sections.map { |section| section["list"] }
-      list.flatten!
-      ids = id.split("#")
-      current_id = "#{prefix}#{ids.shift}"
-      result = list.find { |row| row["id"] == current_id }
-
-      return nil unless result
-
-      return result if ids.empty?
-
-      if result["sections"]
-        find_from_list(result["sections"], ids.join("#"), "#{current_id}#")
-      else
-        nil
       end
     end
 
