@@ -53,9 +53,13 @@ module WhatsappService
       when "list_buttons"
         interactive = Interactive::Button.call(question)
         Send::Interactive.call(phone_number, interactive)
-      when previous_menu
+      when "previous_menu"
         parent = question.parent
         interactive_bot(parent)
+      when "image"
+        caption = question.body
+        media_id = question.media_id
+        Send::Media.call(phone_number, media_id, "image", caption:)
       else
         if question["type"].eql?("service")
           Kredis.hash(room.id).update(id: question["id"])

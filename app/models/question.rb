@@ -32,6 +32,7 @@
 #
 class Question < ApplicationRecord
   include FileUploader::Attachment(:file)
+  include Uploadable
 
   has_many :children, -> { order(:id) }, class_name: "Question", foreign_key: "parent_id", dependent: :destroy
   has_many :sections, -> { order(:id) }, dependent: :destroy
