@@ -18,7 +18,7 @@ sections:
         sections:
           - title: Negara
             list:
-              - title: 🇨🇳  China
+              - title: 🇨🇳 China
                 description: ""
                 id: tarif#china
                 answer: Terima kasih! 🎉 Mohon informasikan berat paket kamu *(dalam kg)* supaya kita bisa hitung tarif pengirimannya ya. 📦💰

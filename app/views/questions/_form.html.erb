@@ -1,5 +1,5 @@
-<%= f.input :parent_id, as: :hidden, input_html: { value: params[:parent_id] } if params[:parent_id] %>
-<%= f.input :section_id, as: :hidden, input_html: { value: params[:section_id] } if params[:parent_id] %>
+<%= f.input :parent_id, as: :hidden if f.object.parent_id %>
+<%= f.input :section_id, as: :hidden if f.object.section_id %>
 <%= f.input :name %>
 <%= f.input :question_type, as: :enum, input_html: { data: { action: "change->question-form#typeChanged", question_form_target: "questionType" } } %>
 <% if parent.present? %>
