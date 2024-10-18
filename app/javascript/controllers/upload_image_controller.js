@@ -13,6 +13,7 @@ export default class extends Controller {
     reader.onload = (event) => {
       const img = document.createElement("img");
       img.src = event.target.result;
+      img.className = "max-h-44";
       this.previewTarget.innerHTML = "";
       this.previewTarget.appendChild(img);
       this.placeholderTarget.classList.add("hidden");
