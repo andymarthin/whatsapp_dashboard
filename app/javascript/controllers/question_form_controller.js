@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="question-form"
 export default class extends Controller {
-  static targets = ["footer", "body", "answer", "questionType", "button"];
+  static targets = ["footer", "body", "questionType", "button"];
   connect() {
     this.showOrHide(this.questionTypeTarget);
   }
@@ -13,7 +13,7 @@ export default class extends Controller {
 
   showOrHide(target) {
     const selected = target.value;
-    let targets = [this.footerTarget, this.answerTarget];
+    let targets = [this.footerTarget];
     if (selected !== "cs") {
       targets.push(this.bodyTarget);
     }
