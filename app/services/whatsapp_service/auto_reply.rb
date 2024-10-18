@@ -24,10 +24,10 @@ module WhatsappService
       interactive_bot(question)
     end
 
-    def send_list(question)
+    def send_list(question, message = nil)
       footer = question.footer
       button = question.button
-      message = question.body
+      message ||= question.body
       list = question.sections.includes(:questions)
       interactive = Interactive::List.call(build_sections(list), message, button, footer:)
       Send::Interactive.call(phone_number, interactive)
@@ -91,11 +91,13 @@ module WhatsappService
 
     def service_handle(data)
       current_session = data.to_h
-      question = find_from_list(questions["sections"], current_session["id"])
+      question = Question.find_by(id: current_session[:id])
+      return unless question
+
       service_answer = question["service_answer"]&.gsub("#INPUT", raw_message)
       list = question["sections"]
       if list.present?
-        send_list(list, service_answer)
+        send_list(question)
       else
         Send::Text.call(to: phone_number, text: service_answer) if service_answer.present?
       end
