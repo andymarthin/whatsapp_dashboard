@@ -7,6 +7,7 @@
 #  body          :text
 #  button        :string
 #  description   :string
+#  file_data     :text
 #  footer        :string
 #  level         :integer          default(0)
 #  name          :string
@@ -15,6 +16,7 @@
 #  title         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  media_id      :string
 #  parent_id     :bigint
 #  section_id    :bigint
 #
@@ -29,6 +31,8 @@
 #  fk_rails_...  (section_id => sections.id)
 #
 class Question < ApplicationRecord
+  include FileUploader::Attachment(:file)
+
   has_many :children, -> { order(:id) }, class_name: "Question", foreign_key: "parent_id", dependent: :destroy
   has_many :sections, -> { order(:id) }, dependent: :destroy
   belongs_to :parent, class_name: "Question", optional: true
@@ -36,7 +40,7 @@ class Question < ApplicationRecord
   validates_presence_of :question_type, :name
   validates :title, presence: true, if: :parent_list_or_buttons?
 
-  enum :question_type, { text: 1, list: 2, list_buttons: 3, cs: 4, main_menu: 5, previous_menu: 6 }
+  enum :question_type, { text: 1, list: 2, list_buttons: 3, cs: 4, main_menu: 5, previous_menu: 6, image: 7 }
   enum :status, { draft: 0, publish: 1 }
 
 

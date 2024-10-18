@@ -7,6 +7,7 @@
 #  body          :text
 #  button        :string
 #  description   :string
+#  file_data     :text
 #  footer        :string
 #  level         :integer          default(0)
 #  name          :string
@@ -15,6 +16,7 @@
 #  title         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  media_id      :string
 #  parent_id     :bigint
 #  section_id    :bigint
 #

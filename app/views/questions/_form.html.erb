@@ -1,28 +1,33 @@
-<%= f.input :parent_id, as: :hidden if f.object.parent_id %>
-<%= f.input :section_id, as: :hidden if f.object.section_id %>
-<%= f.input :name %>
-<%= f.input :question_type, as: :enum, input_html: { data: { action: "change->question-form#typeChanged", question_form_target: "questionType" } } %>
-<% if parent.present? %>
-  <div data-controller="character-counter" data-character-counter-countdown-value="true">
-    <%= f.input :title, required: f.object.parent_list_or_buttons?, input_html: { data: { character_counter_target: "input" }, maxlength: 20 } %>
-    <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
-  </div>
-  <% if parent.question_type.eql?("list") %>
+<div data-controller="visibility" data-visibility-rules-value='{"footer": ["list_buttons", "list"], "body": ["cs", "image", "list", "list_button"], "button": "list", "file": "image"}'>
+  <%= f.input :parent_id, as: :hidden if f.object.parent_id %>
+  <%= f.input :section_id, as: :hidden if f.object.section_id %>
+  <%= f.input :name %>
+  <%= f.input :question_type, as: :enum, input_html: { data: { action: "change->visibility#updateElementVisibility" } } %>
+  <% if parent.present? %>
     <div data-controller="character-counter" data-character-counter-countdown-value="true">
-      <%= f.input :description, input_html: { data: { character_counter_target: "input" }, maxlength: 72 } %>
+      <%= f.input :title, required: f.object.parent_list_or_buttons?, input_html: { data: { character_counter_target: "input" }, maxlength: 20 } %>
       <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
     </div>
+    <% if parent.question_type.eql?("list") %>
+      <div data-controller="character-counter" data-character-counter-countdown-value="true">
+        <%= f.input :description, input_html: { data: { character_counter_target: "input" }, maxlength: 72 } %>
+        <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
-<div data-question-form-target="body" data-controller="character-counter" data-character-counter-countdown-value="true">
-  <%= f.input :body, input_html: { data: { character_counter_target: "input" }, maxlength: 1024 } %>
-  <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
-</div>
-<div data-question-form-target="footer" data-controller="character-counter" data-character-counter-countdown-value="true">
-  <%= f.input :footer, input_html: { data: { character_counter_target: "input" }, maxlength: 60 } %>
-  <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
-</div>
-<div data-question-form-target="button" data-controller="character-counter" data-character-counter-countdown-value="true">
-  <%= f.input :button, input_html: { data: { character_counter_target: "input" }, maxlength: 20 } %>
-  <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
+  <div data-visibility-target="element" data-element-id="body" data-controller="character-counter" data-character-counter-countdown-value="true">
+    <%= f.input :body, input_html: { data: { character_counter_target: "input" }, maxlength: 1024 } %>
+    <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
+  </div>
+  <div data-visibility-target="element" data-element-id="footer" data-controller="character-counter" data-character-counter-countdown-value="true">
+    <%= f.input :footer, input_html: { data: { character_counter_target: "input" }, maxlength: 60 } %>
+    <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
+  </div>
+  <div data-visibility-target="element" data-element-id="button" class="hidden" data-controller="character-counter" data-character-counter-countdown-value="true">
+    <%= f.input :button, input_html: { data: { character_counter_target: "input" }, maxlength: 20 } %>
+    <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
+  </div>
+  <div data-visibility-target="element" data-element-id="file" class="hidden">
+    <%= f.input :file, input_html: { data: { character_counter_target: "input" }, maxlength: 20 } %>
+  </div>
 </div>

@@ -7,17 +7,17 @@ import { application } from "./application";
 import AlertController from "./alert_controller";
 application.register("alert", AlertController);
 
-import CharacterCounter from "@stimulus-components/character-counter";
-application.register("character-counter", CharacterCounter);
-
 import ChatController from "./chat_controller";
 application.register("chat", ChatController);
 
 import ModalController from "./modal_controller";
 application.register("modal", ModalController);
 
-import QuestionFormController from "./question_form_controller";
-application.register("question-form", QuestionFormController);
-
 import TreeController from "./tree_controller";
 application.register("tree", TreeController);
+
+import VisibilityController from "./visibility_controller";
+application.register("visibility", VisibilityController);
+
+import CharacterCounter from "@stimulus-components/character-counter";
+application.register("character-counter", CharacterCounter);

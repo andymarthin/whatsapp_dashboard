@@ -1,5 +1,5 @@
 <%= turbo_frame_tag :remote_modal do %>
-  <%= simple_form_for @question, data: { controller: "question-form" } do |f| %>
+  <%= simple_form_for @question do |f| %>
     <%= render ModalComponent.new(size: :large) do |modal| %>
       <%= modal.with_header_content("Add Question") %>
       <%= modal.with_body do %>
