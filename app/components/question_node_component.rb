@@ -2,9 +2,11 @@
 
 class QuestionNodeComponent < ViewComponent::Base
   include ActionView::RecordIdentifier
-  attr_reader :question
+  attr_reader :question, :children, :sections
   def initialize(question:)
     @question = question
+    @children = question.children.order(id: :asc)
+    @sections = question.sections.order(id: :asc)
   end
 
   def render?

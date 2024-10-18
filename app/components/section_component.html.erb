@@ -29,7 +29,7 @@
     </div>
   </div>
   <ul id="<%= section.node_id %>" class="pl-[34px]">
-    <% section.questions.each do |child| %>
+    <% questions.each do |child| %>
       <%= render QuestionNodeComponent.new(question: child) %>
     <% end %>
   </ul>

@@ -34,11 +34,11 @@
   </div>
   <ul id="<%= question.node_id %>" class="pl-[34px]">
     <% if question.list? %>
-      <% question.sections.each do |section| %>
+      <% sections.each do |section| %>
         <%= render SectionComponent.new(section:) %>
       <% end %>
     <% else %>
-      <% question.children.each do |child| %>
+      <% children.each do |child| %>
         <%= render QuestionNodeComponent.new(question: child) %>
       <% end %>
     <% end %>
