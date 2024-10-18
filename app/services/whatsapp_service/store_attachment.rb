@@ -4,7 +4,6 @@ module WhatsappService
     def initialize(params, message)
       @params = params
       @message = message
-      @attempt = 0
       super
     end
 
@@ -20,28 +19,7 @@ module WhatsappService
 
     def media
       @media ||= begin
-        Tempfile.new("media_#{media_id}", binmode: true).tap do |file|
-          file.write(get_file)
-          file.rewind
-        end
-      end
-    end
-
-    def get_file
-      @attempt += 1
-
-      response = HTTParty.get(
-        media_url,
-        headers: { "Authorization" => "Bearer #{whatsapp_access_token}" }
-      )
-      raise if response.code  >= 500
-
-      if response.code.eql?(200)
-        response.body
-      else
-        raise if @attempt > 5
-
-        get_file
+        Shrine.remote_url(media_url, headers: { "Authorization" => "Bearer #{whatsapp_access_token}" })
       end
     end
 
