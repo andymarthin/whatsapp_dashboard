@@ -16,8 +16,8 @@ application.register("modal", ModalController);
 import TreeController from "./tree_controller";
 application.register("tree", TreeController);
 
+import UploadImageController from "./upload_image_controller";
+application.register("upload-image", UploadImageController);
+
 import VisibilityController from "./visibility_controller";
 application.register("visibility", VisibilityController);
-
-import CharacterCounter from "@stimulus-components/character-counter";
-application.register("character-counter", CharacterCounter);

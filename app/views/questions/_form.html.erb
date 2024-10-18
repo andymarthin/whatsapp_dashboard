@@ -28,6 +28,6 @@
     <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
   </div>
   <div data-visibility-target="element" data-element-id="file" class="hidden">
-    <%= f.input :file, input_html: { data: { character_counter_target: "input" }, maxlength: 20 } %>
+    <%= f.input :file, as: :image %>
   </div>
 </div>
