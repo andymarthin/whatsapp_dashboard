@@ -1,1 +1,4 @@
-<%= f.input :title %>
+<div data-controller="character-counter" data-character-counter-countdown-value="true">
+  <%= f.input :title, input_html: { data: { character_counter_target: "input" }, maxlength: 24 } %>
+  <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
+</div>
