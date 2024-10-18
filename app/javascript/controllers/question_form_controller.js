@@ -13,7 +13,10 @@ export default class extends Controller {
 
   showOrHide(target) {
     const selected = target.value;
-    const targets = [this.footerTarget, this.bodyTarget, this.answerTarget];
+    let targets = [this.footerTarget, this.answerTarget];
+    if (selected !== "cs") {
+      targets.push(this.bodyTarget);
+    }
     if (["main_menu", "cs", "previous_menu"].includes(selected)) {
       targets.forEach((target) => this.hide(target));
     } else {
