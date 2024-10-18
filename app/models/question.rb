@@ -5,7 +5,7 @@
 #  id            :bigint           not null, primary key
 #  answer        :text
 #  body          :text
-#  button        :text
+#  button        :string
 #  description   :string
 #  footer        :string
 #  level         :integer          default(0)
