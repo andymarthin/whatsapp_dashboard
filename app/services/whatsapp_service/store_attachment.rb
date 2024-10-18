@@ -12,6 +12,7 @@ module WhatsappService
       attachment.name = filename
       attachment.file_attacher.assign(media)
       attachment.save
+      message.update(message: caption) if caption.present?
     end
 
     private
@@ -26,6 +27,10 @@ module WhatsappService
     def media_url
       response = Media::RetrieveMediaUrl.call(media_id)
       response["url"]
+    end
+
+    def caption
+      params.dig("messages", 0, message_type, "caption")
     end
 
     def media_id
