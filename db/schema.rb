@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_10_17_154225) do
+ActiveRecord::Schema[8.0].define(version: 2024_10_18_081553) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -48,7 +48,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_17_154225) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "level", default: 0
+    t.text "button"
+    t.bigint "section_id"
     t.index ["parent_id"], name: "index_questions_on_parent_id"
+    t.index ["section_id"], name: "index_questions_on_section_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -61,7 +64,17 @@ ActiveRecord::Schema[8.0].define(version: 2024_10_17_154225) do
     t.index ["from"], name: "index_rooms_on_from"
   end
 
+  create_table "sections", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_sections_on_question_id"
+  end
+
   add_foreign_key "attachments", "messages"
   add_foreign_key "messages", "rooms"
   add_foreign_key "questions", "questions", column: "parent_id"
+  add_foreign_key "questions", "sections"
+  add_foreign_key "sections", "questions"
 end

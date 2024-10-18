@@ -1,0 +1,33 @@
+<li id="<%= dom_id(section) %>">
+  <div class="inline-block font-bold border relative z-[1] pl-[35.5px] p-[7px] pt-[1px] rounded-[5px] border-solid border-[#e3e5ef] before:absolute before:left-[-27.5px] before:top-[-5px] before:flex before:items-center before:justify-center before:h-[55px] before:w-[55px] before:bg-red-700 before:text-white before:text-xl before:rounded-[50%] before:border-[7.5px] before:border-solid before:border-[#eef6d5]">
+    <div class="flex justify-between xl:block 2xl:flex align-center 2xl:space-x-4 h-full mt-2">
+      <div class="flex space-x-4 xl:mb-4 2xl:mb-0">
+        <div class="flex-1 min-w-0">
+          <%= link_to edit_question_section_path(question, section), data: { turbo_frame: :remote_modal } do %>
+            <p class="text-base font-semibold text-gray-900 leading-none truncate mb-0.5 dark:text-white hover:underline">
+              <%= section.title %>
+            </p>
+          <% end %>
+          <p class="text-xs font-medium text-gray-500 dark:text-gray-400">Section</p>
+        </div>
+      </div>
+      <div class="inline-flex items-center w-auto xl:w-full 2xl:w-auto">
+        <%= link_to new_question_path(parent_id: question.id, section_id: section.id), data: { turbo_frame: :remote_modal }, class: "me-2 w-full px-3 py-1 text-sm font-sm text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" do %>
+          <svg class="w-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5" />
+          </svg>
+        <% end %>
+        <%= link_to question_section_path(question, section), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "w-full px-3 py-1 text-sm font-sm text-center text-red-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 dark:bg-gray-800 dark:text-red-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" do %>
+          <svg class="w-4 text-red-700 dark:text-red-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd" />
+          </svg>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <ul id="<%= section.node_id %>" class="pl-[34px]">
+    <% question.children.each do |child| %>
+      <%= render QuestionNodeComponent.new(question: child) %>
+    <% end %>
+  </ul>
+</li>

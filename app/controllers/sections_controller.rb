@@ -1,19 +1,13 @@
-class QuestionsController < ApplicationController
-  before_action :set_question, only: %i[update edit destroy]
-  def index
-  end
+class SectionsController < QuestionsController
+  before_action :set_section, only: %i[edit update destroy]
+  before_action :set_question
 
   def new
-    @parent = Question.find_by(id: params[:parent_id])
-    @question = Question.new(parent: @parent)
-  end
-
-  def tree
-    @question = Question.first
+    @section = Section.new
   end
 
   def create
-    @question = Question.new(question_params)
+    @section = @question.sections.new(section_params)
     if @question.save
       respond_to do |format|
         format.html { redirect_to questions_path }
@@ -24,8 +18,11 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
-    if @question.update(question_params)
+    if @section.update(section_params)
       respond_to do |format|
         format.html { redirect_to questions_path }
         format.turbo_stream
@@ -36,7 +33,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    if @question.destroy
+    if @section.destroy
       respond_to do |format|
         format.html { redirect_to questions_path_path }
         format.turbo_stream
@@ -46,17 +43,14 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def edit
-    @parent = @question.parent
-  end
 
   private
 
-  def set_question
-    @question = Question.find params[:question_id].presence || params[:id]
+  def section_params
+    params.require(:section).permit(:title)
   end
 
-  def question_params
-    params.require(:question).permit(:name, :title, :description, :body, :footer, :answer, :question_type, :parent_id, :section_id)
+  def set_section
+    @section = Section.find params[:id]
   end
 end

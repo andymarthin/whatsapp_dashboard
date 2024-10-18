@@ -1,0 +1,4 @@
+<%= turbo_stream.append @question.node_id do %>
+  <%= render SectionComponent.new(section: @section) %>
+<% end %>
+<%= reset_modal_frame%>

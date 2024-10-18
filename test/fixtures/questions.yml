@@ -5,6 +5,7 @@
 #  id            :bigint           not null, primary key
 #  answer        :text
 #  body          :text
+#  button        :text
 #  description   :string
 #  footer        :string
 #  level         :integer          default(0)
@@ -15,14 +16,17 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  parent_id     :bigint
+#  section_id    :bigint
 #
 # Indexes
 #
-#  index_questions_on_parent_id  (parent_id)
+#  index_questions_on_parent_id   (parent_id)
+#  index_questions_on_section_id  (section_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (parent_id => questions.id)
+#  fk_rails_...  (section_id => sections.id)
 #
 
 one:

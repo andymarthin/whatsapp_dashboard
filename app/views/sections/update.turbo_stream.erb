@@ -1,0 +1,4 @@
+<%= turbo_stream.replace @section do %>
+  <%= render SectionComponent.new(section: @section) %>
+<% end %>
+<%= reset_modal_frame%>

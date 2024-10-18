@@ -12,8 +12,8 @@
         </div>
       </div>
       <div class="inline-flex items-center w-auto xl:w-full 2xl:w-auto">
-        <% if ["list", "list_buttons"].include?(question.question_type) %>
-          <%= link_to new_question_path(parent_id: question.id), data: { turbo_frame: :remote_modal }, class: "me-2 w-full px-3 py-1 text-sm font-sm text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" do %>
+        <% if can_add_child? %>
+          <%= link_to add_new_url, data: { turbo_frame: :remote_modal }, class: "me-2 w-full px-3 py-1 text-sm font-sm text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" do %>
             <svg class="w-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5" />
             </svg>
@@ -28,8 +28,14 @@
     </div>
   </div>
   <ul id="<%= question.node_id %>" class="pl-[34px]">
-    <% question.children.each do |child| %>
-      <%= render QuestionNodeComponent.new(question: child) %>
+    <% if question.list? %>
+      <% question.sections.each do |section| %>
+        <%= render SectionComponent.new(section:) %>
+      <% end %>
+    <% else %>
+      <% question.children.each do |child| %>
+        <%= render QuestionNodeComponent.new(question: child) %>
+      <% end %>
     <% end %>
   </ul>
 </li>

@@ -1,0 +1,13 @@
+<%= turbo_frame_tag :remote_modal do %>
+  <%= simple_form_for @section, url: question_sections_path(@question) do |f| %>
+    <%= render ModalComponent.new do |modal| %>
+      <%= modal.with_header_content("Add Section") %>
+      <%= modal.with_body do %>
+        <%= render partial: "form", locals: { f: f } %>
+      <% end %>
+      <%= modal.with_footer do %>
+        <%= f.button :submit %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,13 @@
+<%= turbo_frame_tag :remote_modal do %>
+  <%= simple_form_for @section, url: question_section_path(@question, @section)  do |f| %>
+    <%= render ModalComponent.new(size: :large) do |modal| %>
+      <%= modal.with_header_content("Edit section") %>
+      <%= modal.with_body do %>
+        <%= render partial: "form", locals: { f: f } %>
+      <% end %>
+      <%= modal.with_footer do %>
+        <%= f.button :submit %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

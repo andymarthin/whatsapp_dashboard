@@ -5,6 +5,7 @@
 #  id            :bigint           not null, primary key
 #  answer        :text
 #  body          :text
+#  button        :text
 #  description   :string
 #  footer        :string
 #  level         :integer          default(0)
@@ -15,23 +16,29 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  parent_id     :bigint
+#  section_id    :bigint
 #
 # Indexes
 #
-#  index_questions_on_parent_id  (parent_id)
+#  index_questions_on_parent_id   (parent_id)
+#  index_questions_on_section_id  (section_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (parent_id => questions.id)
+#  fk_rails_...  (section_id => sections.id)
 #
 class Question < ApplicationRecord
   has_many :children, class_name: "Question", foreign_key: "parent_id", dependent: :destroy
+  has_many :sections, dependent: :destroy
   belongs_to :parent, class_name: "Question", optional: true
+  belongs_to :section, optional: true
   validates_presence_of :question_type, :name
   validates :title, presence: true, if: :parent_list_or_buttons?
 
   enum :question_type, { text: 1, list: 2, list_buttons: 3, cs: 4, main_menu: 5, previous_menu: 6 }
   enum :status, { draft: 0, publish: 1 }
+
 
   before_create :set_level
 
@@ -41,6 +48,9 @@ class Question < ApplicationRecord
   end
 
   def parent_node_id
+    section_node = section&.node_id
+    return section_node if section_node
+
     parent_id.nil? ? "questions" : "questions_#{parent_id}"
   end
 
