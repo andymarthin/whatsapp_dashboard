@@ -2,7 +2,7 @@
   <div class="inline-block font-bold border relative z-[1] pl-[35.5px] p-[7px] pt-[1px] rounded-[5px] border-solid border-[#e3e5ef] before:absolute before:left-[-27.5px] before:top-[-5px] before:flex before:items-center before:justify-center before:h-[55px] before:w-[55px] before:bg-red-700 before:text-white before:text-xl before:rounded-[50%] before:border-[7.5px] before:border-solid before:border-[#eef6d5]">
     <div class="flex justify-between xl:block 2xl:flex align-center 2xl:space-x-4 h-full mt-2">
       <div class="flex space-x-4 xl:mb-4 2xl:mb-0">
-        <div class="flex-1 min-w-0">
+        <div class="flex-1 min-w-0 mr-2">
           <%= link_to edit_question_section_path(question, section), data: { turbo_frame: :remote_modal } do %>
             <p class="text-base font-semibold text-gray-900 leading-none truncate mb-0.5 dark:text-white hover:underline">
               <%= section.title %>
@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="inline-flex items-center w-auto xl:w-full 2xl:w-auto">
-        <%= link_to new_question_path(parent_id: question.id, section_id: section.id), data: { turbo_frame: :remote_modal }, class: "me-2 w-full px-3 py-1 text-sm font-sm text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" do %>
+        <%= link_to new_question_path(parent_id: question.id, section_id: section.id), data: { turbo_frame: :remote_modal }, class: "me-2 w-full px-3 py-1 px-2 text-sm font-sm text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" do %>
           <svg class="w-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5" />
           </svg>
