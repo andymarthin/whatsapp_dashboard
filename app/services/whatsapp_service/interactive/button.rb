@@ -1,10 +1,8 @@
 module WhatsappService::Interactive
   class Button < ApplicationService
-    def initialize(list, body, header: nil, footer: nil)
-      @list = list
-      @body = body
-      @header = header
-      @footer = footer
+    def initialize(question)
+      @question = question
+      super
     end
 
     def call
@@ -12,17 +10,20 @@ module WhatsappService::Interactive
     end
 
     private
-    attr_reader :list, :body, :header, :footer
+    attr_reader :question, :list, :body, :header, :footer
+
+    def list
+      @list ||= question.children
+    end
 
     def data
       {
         type: "button",
-        header: header,
         body: {
-          text: body
+          text: question.body
         },
         footer: {
-          text: footer
+          text: question.footer
         },
         action: {
           buttons:
@@ -36,8 +37,8 @@ module WhatsappService::Interactive
         {
           type: "reply",
           reply: {
-            id: button[:id],
-            title: button[:title]
+            id: button.id,
+            title: button.title
           }
         }
       end

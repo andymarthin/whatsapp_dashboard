@@ -51,7 +51,9 @@ module WhatsappService
       when "list"
         send_list(question)
       when "list_buttons"
-        nil
+        interactive = Interactive::Button.call(question)
+        Send::Interactive.call(phone_number, interactive)
+
       when previous_menu
         parent = question.parent
         interactive_bot(parent)
