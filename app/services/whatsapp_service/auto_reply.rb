@@ -44,11 +44,8 @@ module WhatsappService
     end
 
     def send_list(question, message = nil)
-      footer = question.footer
-      button = question.button
       message ||= question.body
-      list = question.sections.includes(:questions)
-      interactive = Interactive::List.call(build_sections(list), message, button, footer:)
+      interactive = Interactive::List.call(question, message)
       Send::Interactive.call(phone_number, interactive)
     end
 
@@ -77,25 +74,6 @@ module WhatsappService
     def handle_customer_service(question)
       room.update(bot: false, open_until: 24.hours.from_now)
       send_text(question.body)
-    end
-
-    def build_sections(sections, title: "Options")
-      sections.map do |section|
-        {
-          title: section.title,
-          rows: section_rows(section.questions)
-        }
-      end
-    end
-
-    def section_rows(list)
-      list.map do |question|
-        {
-          id: question.id,
-          title: question.title,
-          description: question.description
-        }
-      end
     end
 
     def interactive_type

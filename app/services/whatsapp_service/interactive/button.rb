@@ -48,7 +48,7 @@ module WhatsappService::Interactive
       when "image"
         { id: header.media_id.presence }
       when "text"
-        { text: header.text }
+        header.text
       else
         nil
       end

@@ -1,11 +1,11 @@
 module WhatsappService::Interactive
   class List < ApplicationService
-    def initialize(sections, body, button, header: nil, footer: nil)
-      @sections = sections
+    def initialize(question, body)
+      @sections = question.sections.includes(:questions)
       @body = body
-      @header = header
-      @footer = footer
-      @button = button
+      @header = question.header
+      @footer = question.footer
+      @button = question.button
     end
 
     def call
@@ -18,6 +18,7 @@ module WhatsappService::Interactive
     def data
       {
         type: "list",
+        header: build_header,
         body: {
           text: body
         },
@@ -26,21 +27,37 @@ module WhatsappService::Interactive
         },
         action: {
           button:,
-          sections:
-        },
-        **build_header
+          sections: build_sections
+        }
       }
     end
 
     def build_header
-      return {} unless header
+      return unless header || header&.text?
 
       {
-        header: {
           type: "text",
-          text: header
-          }
+          text: header.text
       }
+    end
+
+    def build_sections
+      sections.map do |section|
+        {
+          title: section.title,
+          rows: section_rows(section.questions)
+        }
+      end
+    end
+
+    def section_rows(list)
+      list.map do |question|
+        {
+          id: question.id,
+          title: question.title,
+          description: question.description
+        }
+      end
     end
   end
 end
