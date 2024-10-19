@@ -8,7 +8,7 @@
       <%= f.simple_fields_for :header do |form| %>
         <%= form.input :header_type, as: :enum, input_html: { data: { action: "change->visibility#updateElementVisibility" } } %>
         <div data-visibility-target="element" data-element-id="headerFile">
-          <%= form.input :file, as: :image, label: "Header File" %>
+          <%= form.input :file, as: :image, label: "Header Image", input_html: { accept: "image/*" } %>
         </div>
         <div data-visibility-target="element" data-element-id="headerText" data-controller="character-counter" data-character-counter-countdown-value="true">
           <%= form.input :text, label: "Header Text", input_html: { data: { character_counter_target: "input" }, maxlength: 20 } %>
@@ -42,6 +42,6 @@
     <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
   </div>
   <div data-visibility-target="element" data-element-id="file" class="hidden">
-    <%= f.input :file, as: :image %>
+    <%= f.input :file, as: :image, input_html: { accept: "image/*" } %>
   </div>
 </div>

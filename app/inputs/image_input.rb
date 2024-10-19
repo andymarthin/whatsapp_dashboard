@@ -1,55 +1,54 @@
 class ImageInput < SimpleForm::Inputs::CollectionInput
   def input(wrapper_options)
-    input_html_options[:data] = { target: "input", action: "change->upload-image#upload" }
-    template.content_tag(:div, class: "flex justify-center mt-8", data: { controller: "upload-image" }) do
-      template.content_tag(:div, class: "rounded-lg shadow-xl bg-gray-50") do
-        template.content_tag(:div, class: "m-4") do
-          output = ActiveSupport::SafeBuffer.new
-          output << preview_image
-          output << template.content_tag(:div, class: "mt-2 ", data: { upload_image_target: "preview" }) do
-            if object.send(attribute_name).present?
-              # append preview image to output
-              template.image_tag(object.send("#{attribute_name}_url"), class: "max-h-44")
-            end
-          end
-          output << template.content_tag(:div, class: "mt-2") do
-            @builder.file_field(attribute_name, input_html_options)
-          end
-          output
-        end
-      end
+    input_html_options[:class] = "hidden"
+    input_html_options[:data] = { action: "change->upload-image#preview", upload_image_target: "input" }
+    merged_input_options = merge_wrapper_options(input_html_options, wrapper_options)
+    template.content_tag(:div, class: "px-4 py-4", data: { controller: "upload-image" }) do
+      output = ActiveSupport::SafeBuffer.new
+      output << @builder.file_field(attribute_name, merged_input_options)
+      output << preview_image
     end
   end
 
   private
 
   def label_preview
-    template.content_tag(:label, "Upload
-      Image(jpg,png,jpeg)", class: "inline-block mb-2 text-gray-500")
+    @builder.label(attribute_name) do
+      output = ActiveSupport::SafeBuffer.new
+      output << icon
+      output << template.content_tag(:h2, "Upload picture", class: "mb-2 text-xl font-bold tracking-tight text-gray-700")
+      output << template.content_tag(:p, class: "font-normal text-sm text-gray-400 md:px-6") do
+        "Choose photo size should be less than #{template.content_tag(:b, "2mb", class: "text-gray-600")}".html_safe
+      end
+      output << template.content_tag(:p, class: "font-normal text-sm text-gray-400 md:px-6") do
+        "and should be in   #{template.content_tag(:b, "JPG, PNG, or GIF", class: "text-gray-600")} format.".html_safe
+      end
+      output << template.content_tag(:span, "", class: "text-gray-500 bg-gray-200 z-50")
+      output
+    end
   end
 
-  def have_image_class
-    object.send(attribute_name) ? "hidden" : ""
+  def preview_class
+    have_image? ? "max-w-sm p-6 bg-gray-100 rounded-lg items-center mx-auto text-center cursor-pointer" : "max-w-sm p-6 bg-gray-100 border-dashed border-2 border-gray-400 rounded-lg items-center mx-auto text-center cursor-pointer"
+  end
+
+  def have_image?
+    object.send(attribute_name).present?
   end
 
   def preview_image
-    template.content_tag(:div, class: have_image_class, data: { upload_image_target: "placeholder" }) do
-      preview_output = ActiveSupport::SafeBuffer.new
-      preview_output << label_preview
-      preview_output << template.content_tag(:div, class: "flex items-center justify-center w-full") do
-        template.content_tag(:label, class: "flex flex-col w-full h-32 hover:bg-gray-100 hover:border-gray-300") do
-          template.content_tag(:div, class: "flex flex-col items-center justify-center pt-7") do
-            output = ActiveSupport::SafeBuffer.new
-            output << icon
-          end
-        end
+    template.content_tag(:div, class: preview_class, data: { upload_image_target: "preview" }) do
+      if have_image?
+        template.image_tag(object.send("#{attribute_name}_url"), class: "max-h-48 rounded-lg mx-auto", data: { action: "click->upload-image#chooseFile" })
+      else
+        label_preview
       end
     end
   end
 
   def icon
-    template.content_tag(:svg, aria: { hidden: true }, xmlns: "http://www.w3.org/2000/svg", fill: "currentColor", viewBox: "0 0 20 18", class: "w-12 h-12 text-gray-400 group-hover:text-gray-600") do
-      template.content_tag(:path, "", d: "M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z")
+    template.content_tag(:svg, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", "stroke-width": "1.5", stroke: "currentColor", class: "w-8 h-8 text-gray-700 mx-auto mb-4") do
+      template.content_tag(:path, "", "stroke-linecap": "round", "stroke-linejoin": "round", d: "M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5")
     end
   end
 end
