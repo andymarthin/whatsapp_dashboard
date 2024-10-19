@@ -1,0 +1,7 @@
+<%= render(Sidebar::BaseComponent.new) do %>
+  <%= render(Sidebar::WrapperComponent.new) do |wrapper| %>
+    <%= wrapper.with_item(text: "Dashboard", url: root_path, url_type: :exclusive) %>
+    <%= wrapper.with_item(text: "Room", url: rooms_path) %>
+    <%= wrapper.with_item(text: "Question Tree", url: tree_questions_path) %>
+  <% end %>
+<% end %>
