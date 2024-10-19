@@ -13,6 +13,9 @@ application.register("chat", ChatController);
 import ModalController from "./modal_controller";
 application.register("modal", ModalController);
 
+import ToggleFormController from "./toggle_form_controller";
+application.register("toggle-form", ToggleFormController);
+
 import TreeController from "./tree_controller";
 application.register("tree", TreeController);
 

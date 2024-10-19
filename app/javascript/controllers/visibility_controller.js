@@ -54,11 +54,7 @@ export default class extends Controller {
   }
 
   setInputElementDisable(element, isVisible) {
-    const inputElements = element.querySelectorAll(
-      "input",
-      "select",
-      "textarea",
-    );
+    const inputElements = element.querySelectorAll("input, select, textarea");
     inputElements.forEach((input) => {
       input.toggleAttribute("disabled", !isVisible);
     });
