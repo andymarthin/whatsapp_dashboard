@@ -20,15 +20,19 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
   <body class="bg-gray-50 dark:bg-gray-900">
-    <%= render "layouts/aside" %>
-    <main>
-      <div class="container px-4 pt-10 mx-auto lg:px-0 dark:bg-gray-900">
+    <div class="flex overflow-hidden bg-gray-50 dark:bg-gray-900">
+      <%= render "layouts/aside" %>
+      <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
         <div id="notification-flash" class="fixed right-0 z-[150]">
           <%= render "layouts/notification" %>
         </div>
-        <%= yield %>
+        <main>
+          <div class="px-4 pt-6">
+            <%= yield %>
+          </div>
+          <%= turbo_frame_tag :remote_modal %>
+        </main>
       </div>
-      <%= turbo_frame_tag :remote_modal %>
-    </main>
+    </div>
   </body>
 </html>
