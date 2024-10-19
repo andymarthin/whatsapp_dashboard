@@ -1,0 +1,35 @@
+# == Schema Information
+#
+# Table name: headers
+#
+#  id          :bigint           not null, primary key
+#  file_data   :text
+#  header_type :integer
+#  text        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  media_id    :string
+#  question_id :bigint           not null
+#
+# Indexes
+#
+#  index_headers_on_question_id  (question_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (question_id => questions.id)
+#
+
+one:
+  question: one
+  header_type: 1
+  file_data: MyText
+  text: MyString
+  media_id: MyString
+
+two:
+  question: two
+  header_type: 1
+  file_data: MyText
+  text: MyString
+  media_id: MyString

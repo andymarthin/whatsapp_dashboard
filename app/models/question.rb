@@ -36,6 +36,7 @@ class Question < ApplicationRecord
 
   has_many :children, -> { order(:id) }, class_name: "Question", foreign_key: "parent_id", dependent: :destroy
   has_many :sections, -> { order(:id) }, dependent: :destroy
+  has_one :header, dependent: :destroy
   belongs_to :parent, class_name: "Question", optional: true
   belongs_to :section, optional: true
   validates_presence_of :question_type, :name
@@ -44,6 +45,7 @@ class Question < ApplicationRecord
   enum :question_type, { text: 1, list: 2, list_buttons: 3, cs: 4, main_menu: 5, previous_menu: 6, image: 7 }
   enum :status, { draft: 0, publish: 1 }
 
+  accepts_nested_attributes_for :header, reject_if: :all_blank
 
   before_create :set_level
 
@@ -66,8 +68,13 @@ class Question < ApplicationRecord
   def parent_list_or_buttons?
     return false unless parent
 
-    [ "list_buttons", "list" ].include?(parent.question_type)
+    %w[list_buttons list].include?(parent.question_type)
   end
+
+  def can_have_header?
+    %w[list_buttons list].include?(parent.question_type)
+  end
+
   private
 
   def set_level

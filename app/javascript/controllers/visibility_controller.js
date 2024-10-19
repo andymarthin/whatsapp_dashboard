@@ -17,13 +17,13 @@ export default class extends Controller {
     this.elementTargets.forEach((element) => {
       const elementId = element.dataset.elementId;
       const visibilityRule = this.rulesValue[elementId];
-
       if (visibilityRule) {
         const shouldBeVisible = this.checkVisibilityRule(
           visibilityRule,
           selectedValue,
         );
         this.setElementVisibility(element, shouldBeVisible);
+        this.setInputElementDisable(element, shouldBeVisible);
       }
     });
   }
@@ -51,5 +51,16 @@ export default class extends Controller {
 
   setElementVisibility(element, isVisible) {
     element.classList.toggle("hidden", !isVisible);
+  }
+
+  setInputElementDisable(element, isVisible) {
+    const inputElements = element.querySelectorAll(
+      "input",
+      "select",
+      "textarea",
+    );
+    inputElements.forEach((input) => {
+      input.toggleAttribute("disabled", !isVisible);
+    });
   }
 }

@@ -6,6 +6,7 @@ class QuestionsController < ApplicationController
   def new
     @parent = Question.find_by(id: params[:parent_id])
     @question = Question.new(parent: @parent, section_id: params[:section_id])
+    @question.build_header
   end
 
   def tree
@@ -48,6 +49,7 @@ class QuestionsController < ApplicationController
 
   def edit
     @parent = @question.parent
+    @question.build_header unless @question.header
   end
 
   private
@@ -57,6 +59,19 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:name, :title, :description, :body, :footer, :answer, :question_type, :parent_id, :section_id, :button, :file)
+    params.require(:question).permit(
+      :name,
+      :title,
+      :description,
+      :body,
+      :footer,
+      :answer,
+      :question_type,
+      :parent_id,
+      :section_id,
+      :button,
+      :file,
+      header_attributes: [ :text, :header_type, :file, :id ]
+    )
   end
 end

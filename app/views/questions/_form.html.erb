@@ -1,8 +1,22 @@
-<div data-controller="visibility" data-visibility-rules-value='{"footer": ["list_buttons", "list"], "body": ["cs", "image", "list", "list_button"], "button": "list", "file": "image"}'>
+<div data-controller="visibility" data-visibility-rules-value='{"footer": ["list_buttons", "list"], "body": ["cs", "image", "list", "list_buttons"], "button": "list", "file": "image", "header": ["list", "list_buttons"]}'>
   <%= f.input :parent_id, as: :hidden if f.object.parent_id %>
   <%= f.input :section_id, as: :hidden if f.object.section_id %>
   <%= f.input :name %>
   <%= f.input :question_type, as: :enum, input_html: { data: { action: "change->visibility#updateElementVisibility" } } %>
+  <div data-visibility-target="element" data-element-id="header" class="hidden">
+    <div data-controller="visibility" data-visibility-rules-value='{"headerFile": "image", "headerText": "text"}'>
+      <%= f.simple_fields_for :header do |form| %>
+        <%= form.input :header_type, as: :enum, input_html: { data: { action: "change->visibility#updateElementVisibility" } } %>
+        <div data-visibility-target="element" data-element-id="headerFile">
+          <%= form.input :file, as: :image, label: "Header File" %>
+        </div>
+        <div data-visibility-target="element" data-element-id="headerText" data-controller="character-counter" data-character-counter-countdown-value="true">
+          <%= form.input :text, label: "Header Text", input_html: { data: { character_counter_target: "input" }, maxlength: 20 } %>
+          <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
   <% if parent.present? %>
     <div data-controller="character-counter" data-character-counter-countdown-value="true">
       <%= f.input :title, required: f.object.parent_list_or_buttons?, input_html: { data: { character_counter_target: "input" }, maxlength: 20 } %>
