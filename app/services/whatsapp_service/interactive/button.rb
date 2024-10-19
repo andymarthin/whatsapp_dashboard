@@ -19,6 +19,7 @@ module WhatsappService::Interactive
     def data
       {
         type: "button",
+        header: build_header,
         body: {
           text: question.body
         },
@@ -30,6 +31,27 @@ module WhatsappService::Interactive
         }
 
       }
+    end
+
+    def build_header
+      header = question.header
+      nil unless header or %w[text image].include?(header.header_type)
+
+      {
+        type: header.header_type,
+        header.header_type => header_payload(header)
+      }
+    end
+
+    def header_payload(header)
+      case header.header_type
+      when "image"
+        { id: header.media_id.presence }
+      when "text"
+        { text: header.text }
+      else
+        nil
+      end
     end
 
     def buttons
