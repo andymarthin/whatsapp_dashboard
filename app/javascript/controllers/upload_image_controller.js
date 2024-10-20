@@ -29,8 +29,7 @@ export default class extends Controller {
     reader.readAsDataURL(file);
   }
 
-  chooseFile(event) {
-    event.stopPropagation();
+  chooseFile(_event) {
     this.inputTarget.click();
   }
 }

@@ -2,37 +2,13 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="visibility"
 export default class extends Controller {
-  static targets = ["element", "trigger"];
+  static targets = ["element"];
   static values = {
     rules: Object,
   };
 
-  initialize() {
-    this.updateElementVisibilityEvent =
-      this.handleUpdateElementVisibility.bind(this);
-  }
-
   connect() {
-    if (!this.triggerTarget.disabled) {
-      this.updateElementVisibility();
-    }
-    this.triggerTarget.addEventListener(
-      "change",
-      this.updateElementVisibilityEvent,
-    );
-  }
-
-  disconnect() {
-    this.triggerTarget.removeEventListener(
-      "change",
-      this.updateElementVisibilityEvent,
-    );
-  }
-
-  handleUpdateElementVisibility(event) {
-    if (!event.target.disabled) {
-      this.updateElementVisibility();
-    }
+    this.updateElementVisibility();
   }
 
   updateElementVisibility(event) {

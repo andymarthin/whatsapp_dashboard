@@ -1,30 +1,21 @@
-<div data-controller="visibility" data-visibility-rules-value='{"footer": ["list_buttons", "list"], "body": ["cs", "image", "list", "list_buttons"], "button": "list", "file": "image", "header": ["list", "list_buttons"], "headerOnlyText": "list", "headerSelect": "list_buttons"}'>
+<div data-controller="visibility" data-visibility-rules-value='{"footer": ["list_buttons", "list"], "body": ["cs", "image", "list", "list_buttons"], "button": "list", "file": "image", "header": ["list", "list_buttons"]}'>
   <%= f.input :parent_id, as: :hidden if f.object.parent_id %>
   <%= f.input :section_id, as: :hidden if f.object.section_id %>
   <%= f.input :name %>
-  <%= f.input :question_type, as: :enum, input_html: { data: { action: "change->visibility#updateElementVisibility", visibility_target: "trigger" } } %>
+  <%= f.input :question_type, as: :enum, input_html: { data: { action: "change->visibility#updateElementVisibility" } } %>
   <div data-visibility-target="element" data-element-id="header" class="hidden">
     <div data-controller="toggle-form">
       <%= render ToggleComponent.new(text: "Header", value: f.object.header&.persisted?, input_html: { data: { action: "change->toggle-form#updateVisibility", toggle_form_target: "input" } }) %>
       <div data-toggle-form-target="wrapper">
         <%= f.simple_fields_for :header do |form| %>
-          <div data-visibility-target="element" data-element-id="headerOnlyText" class="hidden">
-            <%= form.input :header_type, as: :hidden, input_html: { value: "text", disabled: true } %>
-            <div data-controller="character-counter" data-character-counter-countdown-value="true">
+          <div data-controller="visibility" data-visibility-rules-value='{"headerFile": "image", "headerText": "text"}'>
+            <%= form.input :header_type, as: :enum, input_html: { data: { action: "change->visibility#updateElementVisibility" }, disabled: true } %>
+            <div data-visibility-target="element" data-element-id="headerFile">
+              <%= form.input :file, as: :image, label: "Header Image", input_html: { accept: "image/*", disabled: "disabled" } %>
+            </div>
+            <div data-visibility-target="element" data-element-id="headerText" data-controller="character-counter" data-character-counter-countdown-value="true">
               <%= form.input :text, label: "Header Text", input_html: { data: { character_counter_target: "input" }, maxlength: 20, disabled: true } %>
               <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
-            </div>
-          </div>
-          <div data-visibility-target="element" data-element-id="headerSelect" class="hidden">
-            <div data-controller="visibility" data-visibility-rules-value='{"headerFile": "image", "headerText": "text"}'>
-              <%= form.input :header_type, as: :enum, input_html: { data: { action: "change->visibility#updateElementVisibility", visibility_target: "trigger" }, disabled: true } %>
-              <div data-visibility-target="element" data-element-id="headerFile">
-                <%= form.input :file, as: :image, label: "Header Image", input_html: { accept: "image/*", disabled: "disabled" } %>
-              </div>
-              <div data-visibility-target="element" data-element-id="headerText" data-controller="character-counter" data-character-counter-countdown-value="true">
-                <%= form.input :text, label: "Header Text", input_html: { data: { character_counter_target: "input" }, maxlength: 20, disabled: true } %>
-                <p class="text-white text-sm flex justify-end">There are  <strong data-character-counter-target="counter" class="mx-1"></strong>  characters remaining.</p>
-              </div>
             </div>
           </div>
         <% end %>
