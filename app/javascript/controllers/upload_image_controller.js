@@ -22,8 +22,6 @@ export default class extends Controller {
         "border-2",
         "border-gray-400",
       );
-
-      this.placeholderTarget.classList.add("hidden");
     };
 
     reader.readAsDataURL(file);
