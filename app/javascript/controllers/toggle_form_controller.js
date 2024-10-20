@@ -9,7 +9,6 @@ export default class extends Controller {
 
   updateVisibility(_event) {
     const checked = this.isChecked(this.inputTarget);
-    console.log(checked);
     this.wrapperTarget.classList.toggle("hidden", !checked);
   }
 

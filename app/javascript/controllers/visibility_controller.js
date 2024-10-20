@@ -7,8 +7,30 @@ export default class extends Controller {
     rules: Object,
   };
 
+  initialize() {
+    this.updateElementVisibilityEvent =
+      this.handleUpdateElementVisibility.bind(this);
+  }
+
   connect() {
     if (!this.triggerTarget.disabled) {
+      this.updateElementVisibility();
+    }
+    this.triggerTarget.addEventListener(
+      "change",
+      this.updateElementVisibilityEvent,
+    );
+  }
+
+  disconnect() {
+    this.triggerTarget.removeEventListener(
+      "change",
+      this.updateElementVisibilityEvent,
+    );
+  }
+
+  handleUpdateElementVisibility(event) {
+    if (!event.target.disabled) {
       this.updateElementVisibility();
     }
   }
