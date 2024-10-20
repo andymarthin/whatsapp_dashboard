@@ -23,7 +23,6 @@ export default class extends Controller {
           selectedValue,
         );
         this.setElementVisibility(element, shouldBeVisible);
-        this.setInputElementDisable(element, shouldBeVisible);
       }
     });
   }
@@ -53,10 +52,10 @@ export default class extends Controller {
     element.classList.toggle("hidden", !isVisible);
   }
 
-  setInputElementDisable(element, isVisible) {
-    const inputElements = element.querySelectorAll("input, select, textarea");
-    inputElements.forEach((input) => {
-      input.toggleAttribute("disabled", !isVisible);
-    });
-  }
+  // setInputElementDisable(element, isVisible) {
+  //   const inputElements = element.querySelectorAll("input, select, textarea");
+  //   inputElements.forEach((input) => {
+  //     input.toggleAttribute("disabled", !isVisible);
+  //   });
+  // }
 }
