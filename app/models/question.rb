@@ -45,7 +45,7 @@ class Question < ApplicationRecord
   enum :question_type, { text: 1, list: 2, list_buttons: 3, cs: 4, main_menu: 5, previous_menu: 6, image: 7 }
   enum :status, { draft: 0, publish: 1 }
 
-  accepts_nested_attributes_for :header, reject_if: :all_blank
+  accepts_nested_attributes_for :header, reject_if: :all_blank, allow_destroy: true
 
   before_create :set_level
 

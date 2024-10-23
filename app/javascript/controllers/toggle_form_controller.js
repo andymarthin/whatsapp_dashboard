@@ -2,16 +2,18 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="toggle-form"
 export default class extends Controller {
-  static targets = ["input", "wrapper"];
+  static targets = ["input", "wrapper", "destroy", "exclude"];
   connect() {
     this.updateVisibility();
-    console.log(this.inputTarget);
   }
 
   updateVisibility(_event) {
     const checked = this.isChecked(this.inputTarget);
     this.wrapperTarget.classList.toggle("hidden", !checked);
     this.setInputElementDisable(this.wrapperTarget, checked);
+    if (this.hasDestroyTarget) {
+      this.destroyTarget.value = !checked;
+    }
   }
 
   isChecked(element) {
@@ -20,6 +22,9 @@ export default class extends Controller {
   setInputElementDisable(element, isVisible) {
     const inputElements = element.querySelectorAll("input, select, textarea");
     inputElements.forEach((input) => {
+      if (this.hasDestroyTarget && this.excludeTargets.includes(input)) {
+        return;
+      }
       input.toggleAttribute("disabled", !isVisible);
     });
   }

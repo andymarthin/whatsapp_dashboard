@@ -71,7 +71,7 @@ class QuestionsController < ApplicationController
       :section_id,
       :button,
       :file,
-      header_attributes: [ :text, :header_type, :file, :id ]
+      header_attributes: [ :text, :header_type, :file, :id, :_destroy ]
     )
   end
 end
