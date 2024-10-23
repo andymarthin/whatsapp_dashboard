@@ -41,6 +41,7 @@ class Question < ApplicationRecord
   belongs_to :section, optional: true
   validates_presence_of :question_type, :name
   validates :title, presence: true, if: :parent_list_or_buttons?
+  validate :validate_attributes_by_type
 
   enum :question_type, { text: 1, list: 2, list_buttons: 3, cs: 4, main_menu: 5, previous_menu: 6, image: 7 }
   enum :status, { draft: 0, publish: 1 }
@@ -76,6 +77,27 @@ class Question < ApplicationRecord
   end
 
   private
+
+  def validate_attributes_by_type
+    rules = Question.required_rules[question_type&.to_sym]
+    return unless rules
+
+    rules.each do |rule|
+      attribute = send(rule)
+      if attribute.nil? || attribute&.blank?
+        errors.add(rule.to_sym, :blank)
+      end
+    end
+  end
+
+  def self.required_rules
+    {
+      text: [ "body" ],
+      list: [ "body", "button" ],
+      list_buttons: [ "body" ],
+      image: [ "file" ]
+    }
+  end
 
   def set_level
     self.level = (parent&.level || 0) + 1
