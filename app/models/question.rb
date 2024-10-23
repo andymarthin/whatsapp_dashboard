@@ -76,6 +76,16 @@ class Question < ApplicationRecord
     %w[list_buttons list].include?(parent.question_type)
   end
 
+  def self.required_rules
+    {
+      text: [ "body" ],
+      list: [ "body", "button" ],
+      list_buttons: [ "body" ],
+      image: [ "file" ],
+      cs: [ "body" ]
+    }
+  end
+
   private
 
   def validate_attributes_by_type
@@ -88,15 +98,6 @@ class Question < ApplicationRecord
         errors.add(rule.to_sym, :blank)
       end
     end
-  end
-
-  def self.required_rules
-    {
-      text: [ "body" ],
-      list: [ "body", "button" ],
-      list_buttons: [ "body" ],
-      image: [ "file" ]
-    }
   end
 
   def set_level
