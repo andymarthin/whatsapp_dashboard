@@ -7,7 +7,7 @@ module WhatsappService::Registration
     def call
       path = "#{api_version}/#{phone_number_id}/deregister"
       response = client.post(path, {})
-      JSON.parse response.body
+      WhatsappService::ResponseHandler.call(response)
     end
   end
 end

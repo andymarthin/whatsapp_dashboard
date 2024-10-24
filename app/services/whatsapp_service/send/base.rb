@@ -9,7 +9,7 @@ module WhatsappService::Send
 
       path = "#{api_version}/#{phone_number_id}/messages"
       response = client.post(path, build_payload.to_json)
-      JSON.parse response.body
+      WhatsappService::ResponseHandler.call(response)
     end
 
     private

@@ -14,6 +14,7 @@ module WhatsappService
 
     def client
       @client ||= Faraday.new(url: "https://graph.facebook.com") do |faraday|
+        faraday.use RequestBody
         faraday.response :logger, ::Logger.new($stdout), bodies: true
         faraday.request :url_encoded
         faraday.adapter Faraday.default_adapter # make requests with Net::HTTP
@@ -42,6 +43,20 @@ module WhatsappService
 
     def room
       @room ||= Room.create_with(name: contact_name).find_or_create_by(from: phone_number)
+    end
+
+    def handler_response(response)
+      if response[:status].to_i
+      end
+    end
+  end
+  class RequestBody < Faraday::Middleware
+    def call(env)
+      request_body = env.body
+
+      @app.call(env).on_complete do |response|
+        response[:request_body] = request_body
+      end
     end
   end
 end

@@ -8,7 +8,7 @@ module WhatsappService::Media
     def call
       path = "#{api_version}/#{media_id}"
       response = client.get(path)
-      JSON.parse response.body
+      WhatsappService::ResponseHandler.call(response)
     end
 
     attr_reader :media_id

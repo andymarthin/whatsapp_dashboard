@@ -10,7 +10,7 @@ module WhatsappService::Media
       client.headers["Content-Type"] = "multipart/form-data"
       path = "/#{api_version}/#{phone_number_id}/media"
       response = client.post(path, payload)
-      JSON.parse response.body
+      WhatsappService::ResponseHandler.call(response)
     end
 
     private
