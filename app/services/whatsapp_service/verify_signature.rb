@@ -6,8 +6,8 @@ module WhatsappService
     end
 
     def call
-      raise Error, "Signature Not found" unless signature
-      raise Error, "Signature Not Match" unless signature.eql?(expected_hash)
+      raise Errors::SignatureError, "Signature Not found" unless signature
+      raise Errors::SignatureError, "Signature Not Match" unless signature.eql?(expected_hash)
 
       true
     end

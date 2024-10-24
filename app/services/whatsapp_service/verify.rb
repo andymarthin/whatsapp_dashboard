@@ -14,7 +14,7 @@ module WhatsappService
       )
 
     rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError => e
-      raise Error, e.message
+      raise Errors::Error, e.message
     end
 
     private
