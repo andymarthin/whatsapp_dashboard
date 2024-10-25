@@ -21,8 +21,7 @@ class QuestionsController < ApplicationController
         format.turbo_stream
       end
     else
-      @question.build_header unless @question.header.present?
-      @parent = @question.parent
+      set_header_and_parent
       render :new, status: :unprocessable_entity
     end
   end
@@ -34,8 +33,7 @@ class QuestionsController < ApplicationController
         format.turbo_stream
       end
     else
-      @question.build_header unless @question.header.present?
-      @parent = @question.parent
+      set_header_and_parent
       render :edit, status: :unprocessable_entity
     end
   end
@@ -52,14 +50,18 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    @parent = @question.parent
-    @question.build_header unless @question.header
+    set_header_and_parent
   end
 
   private
 
   def set_question
     @question = Question.find params[:question_id].presence || params[:id]
+  end
+
+  def set_header_and_parent
+    @question.build_header unless @question.header.present?
+    @parent = @question.parent
   end
 
   def question_params
