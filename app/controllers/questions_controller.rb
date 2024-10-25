@@ -21,6 +21,8 @@ class QuestionsController < ApplicationController
         format.turbo_stream
       end
     else
+      @question.build_header unless @question.header.present?
+      @parent = @question.parent
       render :new, status: :unprocessable_entity
     end
   end
@@ -32,6 +34,8 @@ class QuestionsController < ApplicationController
         format.turbo_stream
       end
     else
+      @question.build_header unless @question.header.present?
+      @parent = @question.parent
       render :edit, status: :unprocessable_entity
     end
   end

@@ -1,5 +1,5 @@
 <div data-controller="toggle-form">
-  <%= render ToggleComponent.new(text: "Header", value: f.object.header&.persisted?, input_html: { data: { action: "change->toggle-form#updateVisibility", toggle_form_target: "input" } }) %>
+  <%= render ToggleComponent.new(text: "Header", value: show_header?(f.object.header), input_html: { data: { action: "change->toggle-form#updateVisibility", toggle_form_target: "input" } }) %>
   <div data-toggle-form-target="wrapper">
     <%= f.simple_fields_for :header do |form| %>
       <% if form.object.persisted? %>

@@ -25,5 +25,14 @@ class Header < ApplicationRecord
 
   belongs_to :question
   validates_presence_of :header_type
+  validate :validate_by_header_type
   enum :header_type, { text: 1, image: 2 }
+
+  private
+
+  def validate_by_header_type
+    if text? && MarkdownDetectorService.call(text)
+      errors.add(:text, "cannot contain Markdown")
+    end
+  end
 end
