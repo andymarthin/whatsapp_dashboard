@@ -27,6 +27,7 @@ gem "kredis"
 gem "faraday-multipart"
 gem "marcel"
 gem "simple_form"
+gem "redcarpet"
 
 
 group :development, :test do

@@ -7,31 +7,53 @@
         <div class="whatsapp_bubble" style="width: 100%;">
           <div class="bg-white shadow-[0_1px_0.5px_rgba(0,0,0,0.15)] min-h-[20px] relative rounded-tl-none rounded-[7.5px]">
             <div class="whatsapp_bubble_content">
-              <div class="text-[rgba(0,0,0,0.76)] text-[15px] font-bold leading-[19px] pl-[9px] pr-[7px] pt-1.5 pb-0" dir="auto">
-                <span dir="auto" style="overflow-wrap: break-word; text-align: initial;">
-                  Statement available
-                </span>
-              </div>
+              <% if show_header_text? %>
+                <div class="text-[rgba(0,0,0,0.76)] text-[15px] font-bold leading-[19px] pl-[9px] pr-[7px] pt-1.5 pb-0" dir="auto">
+                  <span dir="auto" style="overflow-wrap: break-word; text-align: initial;">
+                    <%= header_text %>
+                  </span>
+                </div>
+              <% end %>
+              <% if show_image? %>
+                <div class="pt-[3px] pb-0 px-[3px]">
+                  <div class="bg-[#ccd0d5] bg-[center_center] bg-no-repeat bg-[80px_80px] rounded box-border min-w-[240px] after:content-[''] after:block after:pt-[calc(100%*(1_/_1.91))] bg-transparent bg-cover" style="background-image: url('<%= image_url %>');"></div>
+                </div>
+              <% end %>
               <div class="text-neutral-800 text-[13.6px] leading-[19px] pl-[9px] pr-[7px] pt-[7px] pb-1.5">
-                <span class="text-[#282828] text-[13.6px] whitespace-pre-wrap">
-                  <span class="" dir="auto" style="overflow-wrap: break-word; text-align: initial;">
-                    This is to notify you that your latest statement for your Mankt checking plus account account is now available.
-                    <br>
-                    <br>
-                    Please log into your account to view your statement.
+                <span class="text-[#282828] text-[13.6px]">
+                  <span class="text-left" dir="auto" style="overflow-wrap: break-word;">
+                    <%== markdown.render(question.body).strip.gsub("\n", "<br>") %>
                   </span>
                 </span>
                 <span class="mr-[78px] inline-block"></span>
               </div>
+              <% if question.footer.present? %>
+                <div class="text-[rgba(0,0,0,0.45)] text-[13px] leading-[17px] pl-[9px] pr-[7px] pt-0 pb-2" dir="auto">
+                  <%= question.footer %>
+                </div>
+              <% end %>
               <time aria-hidden="true" class="text-[rgba(0,0,0,0.4)] text-[11px] h-[15px] leading-[15px] absolute right-[7px] bottom-[3px]">
                 19:37
               </time>
             </div>
-            <div class="px-2 py-0 border-t-[#dadde1] border-t border-solid">
-              <div class="whatsapp_bubble_footer flex justify-center flex-row items-center">
-                <span aria-hidden="true" class="bg-no-repeat bg-contain shrink-0 h-4 opacity-80 w-4 mr-1 whatsapp_bubble_footer_button"></span>
-                <span class="overflow-hidden text-ellipsis whitespace-nowrap">View statement</span></div>
-            </div>
+            <% if show_options? %>
+              <div class="px-2 py-0 border-t-[#dadde1] border-t border-solid">
+                <% if question.list? %>
+                  <div class="whatsapp_bubble_footer flex justify-center flex-row items-center">
+                    <span aria-hidden="true" class="bg-no-repeat bg-contain shrink-0 h-4 opacity-80 w-4 mr-1" style="background-image: url('<%= image_path("list.png") %>');"></span>
+                    <span class="overflow-hidden text-ellipsis whitespace-nowrap"><%= question.button %></span>
+                  </div>
+                <% end %>
+                <% if question.list_buttons? %>
+                  <% children.each do |child| %>
+                    <div class="whatsapp_bubble_footer flex justify-center flex-row items-center">
+                      <span aria-hidden="true" class="bg-no-repeat bg-contain shrink-0 h-4 opacity-80 w-4 mr-1" style="background-image: url('<%= image_path("icon_button_reply.png") %>');"></span>
+                      <span class="overflow-hidden text-ellipsis whitespace-nowrap"><%= child.name %></span>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

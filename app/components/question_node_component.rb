@@ -24,4 +24,8 @@ class QuestionNodeComponent < ViewComponent::Base
   def can_add_child?
     [ "list", "list_buttons" ].include?(question.question_type)
   end
+
+  def can_view?
+    %w[text list list_buttons image].include?(question.question_type)
+  end
 end

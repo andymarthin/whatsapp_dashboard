@@ -1,0 +1,8 @@
+<%= turbo_frame_tag :remote_modal do %>
+  <%= render ModalComponent.new do |modal| %>
+    <%= modal.with_header_content(@question.name) %>
+    <%= modal.with_body do %>
+      <%= render(WhatsappPreviewComponent.new(question: @question)) %>
+    <% end %>
+  <% end %>
+<% end %>

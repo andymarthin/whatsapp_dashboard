@@ -12,9 +12,11 @@
       <div class="p-6 space-y-6" id="content">
         <%= body %>
       </div>
-      <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-        <%= footer %>
-      </div>
+      <% if footer.present? %>
+        <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+          <%= footer %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

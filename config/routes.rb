@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       post :end_session
     end
   end
-  resources :questions, except: %i[show] do
+  resources :questions do
     resources :sections, except: %i[show]
     collection do
       get :tree
