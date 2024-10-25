@@ -21,5 +21,5 @@ class MarkdownDetectorService < ApplicationService
 
   private
 
-  attr_reader :text, :element_type
+  attr_reader :text
 end
