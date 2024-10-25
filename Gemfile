@@ -4,7 +4,7 @@ ruby file: ".ruby-version"
 
 gem "rails", "8.0.0.rc1"
 gem "propshaft"
-gem "pg", "~> 1.1"
+gem "pg", "~> 1.5"
 gem "puma", ">= 5.0"
 gem "jsbundling-rails"
 gem "turbo-rails"
