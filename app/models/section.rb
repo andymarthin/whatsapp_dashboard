@@ -18,6 +18,7 @@
 #
 class Section < ApplicationRecord
   belongs_to :question
+  validates_presence_of :title
   has_many :questions, -> { order(:id) }, dependent: :destroy
 
   def node_id
