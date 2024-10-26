@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %w[show init_session end_session]
+  before_action :set_room, only: %w[show init_session end_session create]
   def index
     @rooms = Room.open.order(open_until: :desc)
   end
