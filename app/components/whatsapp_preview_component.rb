@@ -13,7 +13,14 @@ class WhatsappPreviewComponent < ViewComponent::Base
   end
 
   def markdown
-    Redcarpet::Markdown.new(RedcarpetCustom, extensions = {})
+    Redcarpet::Markdown.new(
+  WhatsAppRenderer.new,
+  {
+    disable_indented_code_blocks: true,
+    space_after_headers: true,
+    hard_wrap: true
+  }
+)
   end
 
   def children
@@ -42,16 +49,28 @@ class WhatsappPreviewComponent < ViewComponent::Base
     end
   end
 end
-class RedcarpetCustom < Redcarpet::Render::HTML
+class WhatsAppRenderer < Redcarpet::Render::HTML
   def preprocess(doc)
-    doc.gsub("\r\n", "\r\n&nbsp;")
+    doc.gsub(/\*(\w+)\*/, '**\1**')
   end
 
-  def list(contents, list_type)
-    "<ul class=\"max-w-md list-disc list-inside\">#{contents}<ul/>"
+  def normal_text(text)
+    text
   end
 
   def paragraph(text)
-    "<span>#{text}</span>"
+    "#{text}\n\n"
+  end
+
+  def list_item(text, _list_type)
+    "•⁠  ⁠#{text}\n"
+  end
+
+  def header(text, _header_level)
+    "#{text}\n\n"
+  end
+
+  def linebreak
+    "\n"
   end
 end
