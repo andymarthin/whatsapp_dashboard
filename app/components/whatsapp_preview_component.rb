@@ -13,11 +13,10 @@ class WhatsappPreviewComponent < ViewComponent::Base
   end
 
   def markdown
-    Redcarpet::Markdown.new(WhatsAppRenderer, {
-    disable_indented_code_blocks: true,
-    space_after_headers: true,
-    hard_wrap: true
-  }
+    Redcarpet::Markdown.new(WhatsAppRenderer,
+    hard_wrap: true,
+    underline: true,
+    lax_spacing: true
 )
   end
 
@@ -49,11 +48,10 @@ class WhatsappPreviewComponent < ViewComponent::Base
 end
 class WhatsAppRenderer < Redcarpet::Render::HTML
   def preprocess(doc)
-    doc.gsub(/\*(\w+)\*/, '**\1**')
-  end
-
-  def normal_text(text)
-    text
+    doc.gsub!(/\*(\w+)\*/m, '**\1**')
+    doc.gsub!(/\_(\w+)\_/, '*\1*')
+    doc.gsub!("\n", " <br> ")
+    doc.gsub("- ", " - ")
   end
 
   def paragraph(text)
@@ -69,6 +67,6 @@ class WhatsAppRenderer < Redcarpet::Render::HTML
   end
 
   def linebreak
-    "\n"
+    "\n "
   end
 end
