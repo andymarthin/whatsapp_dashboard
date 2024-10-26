@@ -28,6 +28,7 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(question_params)
+      flash.now[:success] = "Question has been updated!"
       respond_to do |format|
         format.html { redirect_to questions_path }
         format.turbo_stream

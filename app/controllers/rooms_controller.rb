@@ -1,10 +1,10 @@
 class RoomsController < ApplicationController
+  before_action :set_room, only: %w[show init_session end_session]
   def index
     @rooms = Room.open.order(open_until: :desc)
   end
 
   def show
-    @room = room
     @pagy, messages = pagy_countless(@room.messages.includes(:attachment).order(id: :desc), items: 20)
     @messages = messages.reverse
     respond_to do |format|
@@ -14,29 +14,29 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = room
     @message = WhatsappService::SendMessage.call(room_id: @room.id, text: params[:message])
   end
 
   def init_session
     WhatsappService::Send::Text.call(to:, text: ENV["AGENT_INIT_SESSION"])
-    redirect_to room_path(room), status: :see_other
+    flash[:success] = "Message has been sent!"
+    redirect_to room_path(@room, format: :html), status: :see_other
   end
 
   def end_session
-    room.update(bot: true)
+    @room.update(bot: true)
     WhatsappService::Send::Text.call(to:, text: ENV["AGENT_END_SESSION"])
     redirect_to rooms_path, status: :see_other
   end
 
   private
 
-  def room
+  def set_room
     @room ||= Room.find params[:room_id].presence || params[:id]
   end
 
   def to
-    room.from
+    @room.from
   end
 
   def pagy_countless_get_items(collection, pagy) # rubocop:disable Metrics/AbcSize

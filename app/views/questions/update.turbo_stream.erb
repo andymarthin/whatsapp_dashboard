@@ -1,4 +1,5 @@
 <%= turbo_stream.replace @question do %>
   <%= render QuestionNodeComponent.new(question: @question) %>
 <% end %>
-<%= reset_modal_frame%>
+<%= reset_modal_frame %>
+<%= render_turbo_stream_flash_message %>
