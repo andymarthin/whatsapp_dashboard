@@ -13,9 +13,7 @@ class WhatsappPreviewComponent < ViewComponent::Base
   end
 
   def markdown
-    Redcarpet::Markdown.new(
-  WhatsAppRenderer.new,
-  {
+    Redcarpet::Markdown.new(WhatsAppRenderer, {
     disable_indented_code_blocks: true,
     space_after_headers: true,
     hard_wrap: true
